@@ -26,7 +26,14 @@ def book1_A_Game_of_Thrones():
             "Bio": "Jon Snow bastard son of Eddard Stark",
             "Image": "Jon_Snow.png"
         }
-        return character_profile_eddard, character_profile_tyrion, character_profile_Jon
+        character_profile_caetlyn = {
+            "Name": "Caetlyn Stark",
+            "House": "House Stark of Winterfell, House Tully",
+            "Titles": ["Lady of Winterfell"],
+            "Bio": "Caetlyn  Stark",
+            "Image": "Caetlyn_Stark.png"
+        }
+        return character_profile_eddard, character_profile_tyrion, character_profile_Jon, character_profile_caetlyn
     
     ##return character_profile()
     return character_profile()
@@ -39,11 +46,15 @@ def show_profile1():
 
 # Function to display Tyrion's profile
 def show_profile2():
-    _, character_profile_tyrion, _ = book1_A_Game_of_Thrones()
+    _, character_profile_tyrion, _, _ = book1_A_Game_of_Thrones()
     display_profile(character_profile_tyrion)
 def show_profile3():
     _,_, character_profile_Jon = book1_A_Game_of_Thrones()
     display_profile(character_profile_Jon)
+
+def show_profile4():
+    _,_, character_profile_caetlyn,_ = book1_A_Game_of_Thrones()
+    display_profile(character_profile_caetlyn)
 
 def display_profile(character_profile):
     profile_text = f"Name: {character_profile['Name']}\n" \
@@ -61,7 +72,7 @@ def display_profile(character_profile):
 
 def update_image(character_profile):
     try:
-        image_path = f"/Users/santomukiza/Desktop/test/character_profile/{character_profile['Image']}"
+        image_path = f"/Users/santomukiza/Desktop/test/character_profile/Png Files/{character_profile['Image']}"
         pil_image = Image.open(image_path)  # Load the image using Pillow
         resized_image = pil_image.resize((150, 150))  #Resize image to fit the UI
         tk_image = ImageTk.PhotoImage(resized_image)  #Convert to PhotoImage
@@ -102,5 +113,9 @@ button_tyrion.place(x=20, y=400)
 button_jon = tk.Button(root, text="Jon Snow", command=show_profile3)
 button_jon.pack(pady=5)
 button_jon.place(x=260, y=400)
+
+button_caetlyn = tk.Button(root, text="Caetlyn Stark", command=show_profile4)
+button_caetlyn.pack(pady=5)
+button_caetlyn.place(x=370, y=400)
 # Run the app
 root.mainloop()
