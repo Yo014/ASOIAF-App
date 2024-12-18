@@ -31,9 +31,38 @@ def book1_A_Game_of_Thrones():
             "House": "House Stark of Winterfell, House Tully",
             "Titles": ["Lady of Winterfell"],
             "Bio": "Caetlyn  Stark",
-            "Image": "Caetlyn_Stark.png"
+            "Image": "Catelyn_Stark.png"
         }
-        return character_profile_eddard, character_profile_tyrion, character_profile_Jon, character_profile_caetlyn
+        character_profile_arya= {
+            "Name": "Arya Stark",
+            "House": "House Stark of Winterfell",
+            "Titles": [""],
+            "Bio": "Arya Stark",
+            "Image": "Arya_Stark.png"
+        }
+        chararacter_profile_sansa= {
+            "Name": "Sansa Stark",
+            "House": "House Stark of Winterfell",
+            "Titles": [""],
+            "Bio": "Sansa Stark",
+            "Image": "Sansa_Stark.png"
+        }
+        chararacter_profile_daenerys= {
+            "Name": "Daenerys Targaryen",
+            "House": "House Targaryen of Dragonstone",
+            "Titles": [""],
+            "Bio": "Daenerys Targaryen",
+            "Image": "Daenerys_Targaryen.png"
+        }
+        character_profile_bran= {
+            "Name": "Bran Stark",
+            "House": "House Stark of Winterfell",
+            "Titles": [""],
+            "Bio": "Bran Stark",
+            "Image": "Bran_Stark.png"
+            
+        }
+        return character_profile_eddard, character_profile_tyrion, character_profile_Jon, character_profile_caetlyn, character_profile_arya, chararacter_profile_sansa, chararacter_profile_daenerys, character_profile_bran
     
     ##return character_profile()
     return character_profile()
@@ -41,20 +70,44 @@ def book1_A_Game_of_Thrones():
     # Function to display the profile
 # Function to display Eddard's profile
 def show_profile1():
-    character_profile_eddard, _, _ = book1_A_Game_of_Thrones()
+    profiles = book1_A_Game_of_Thrones()
+    character_profile_eddard = profiles[0]
     display_profile(character_profile_eddard)
 
 # Function to display Tyrion's profile
 def show_profile2():
-    _, character_profile_tyrion, _, _ = book1_A_Game_of_Thrones()
+    profiles = book1_A_Game_of_Thrones()
+    character_profile_tyrion = profiles[1]
     display_profile(character_profile_tyrion)
 def show_profile3():
-    _,_, character_profile_Jon = book1_A_Game_of_Thrones()
+    profiles = book1_A_Game_of_Thrones()
+    character_profile_Jon = profiles[2]
     display_profile(character_profile_Jon)
 
 def show_profile4():
-    _,_, character_profile_caetlyn,_ = book1_A_Game_of_Thrones()
+    profiles = book1_A_Game_of_Thrones()
+    character_profile_caetlyn = profiles[3]
     display_profile(character_profile_caetlyn)
+
+def show_profile5():
+    profiles = book1_A_Game_of_Thrones()
+    character_profile_arya = profiles[4]
+    display_profile(character_profile_arya)  
+
+def show_profile6():
+    profiles = book1_A_Game_of_Thrones()
+    character_profile_sansa = profiles[5]
+    display_profile(character_profile_sansa)    
+
+def show_profile7():
+    profiles = book1_A_Game_of_Thrones()
+    character_profile_daenerys = profiles[6]
+    display_profile(character_profile_daenerys)  
+
+def show_profile8():
+    profiles = book1_A_Game_of_Thrones()
+    character_profile_bran = profiles[7]
+    display_profile(character_profile_bran)
 
 def display_profile(character_profile):
     profile_text = f"Name: {character_profile['Name']}\n" \
@@ -74,7 +127,7 @@ def update_image(character_profile):
     try:
         image_path = f"/Users/santomukiza/Desktop/test/character_profile/Png Files/{character_profile['Image']}"
         pil_image = Image.open(image_path)  # Load the image using Pillow
-        resized_image = pil_image.resize((150, 150))  #Resize image to fit the UI
+        resized_image = pil_image.resize((160, 200))  #Resize image to fit the UI
         tk_image = ImageTk.PhotoImage(resized_image)  #Convert to PhotoImage
         image_label.config(image=tk_image)
         image_label.image = tk_image  #Keep a reference to avoid garbage collection
@@ -93,29 +146,46 @@ def update_text_box(profile_text):
 root = tk.Tk()
 root.title("Character Profile Viewer")
 root.geometry("600x600")  # Set window size
+root.configure(bg="light blue")
 # Image display area
 image_label = tk.Label(root)
+image_label = tk.Label(root, bg="light blue")
 image_label.pack(pady=10)
 # Profile display area
-text_box = tk.Text(root, wrap=tk.WORD, width=800, height=15, state="disabled")
-text_box.pack(padx=20, pady=20)
+text_box = tk.Text(root, wrap=tk.WORD, width=80, height=15, state="disabled")
+text_box.pack(pady=5)
+text_box.place(x=15, y=220)
 
+
+def buttons():
+    button_bg = "light blue"
 
 # Button to load the profile
-button_eddard = tk.Button(root, text="Eddard Stark", command=show_profile1)
-button_eddard.pack(pady=5)
-button_eddard.place(x=150, y=400)
+    button_eddard = tk.Button(root, text="Eddard Stark", command=show_profile1,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0, )
+    button_eddard.place(x=470, y=450)
+    
+    button_tyrion = tk.Button(root, text="Tyrion Lannister", command=show_profile2,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_tyrion.place(x=20, y=450)
 
-button_tyrion = tk.Button(root, text="Tyrion Lannister", command=show_profile2)
-button_tyrion.pack(pady=5)
-button_tyrion.place(x=20, y=400)
+    button_jon = tk.Button(root, text="Jon Snow", command=show_profile3,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_jon.place(x=263, y=450)
 
-button_jon = tk.Button(root, text="Jon Snow", command=show_profile3)
-button_jon.pack(pady=5)
-button_jon.place(x=260, y=400)
+    button_caetlyn = tk.Button(root, text="Catelyn Stark", command=show_profile4,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_caetlyn.place(x=263, y=500)
 
-button_caetlyn = tk.Button(root, text="Caetlyn Stark", command=show_profile4)
-button_caetlyn.pack(pady=5)
-button_caetlyn.place(x=370, y=400)
+    button_arya = tk.Button(root, text="Arya Stark", command=show_profile5,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_arya.place(x=470, y=500)
+
+    button_daenerys = tk.Button(root, text="Daenerys Targaryen", command=show_profile7,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_daenerys.place(x=20, y=500)
+
+    button_sansa = tk.Button(root, text="Sansa Stark", command=show_profile6,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_sansa.place(x=160, y=550)
+
+    button_bran = tk.Button(root, text="Bran Stark", command=show_profile8,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_bran.place(x=350, y=550) 
+    
+    return button_bran, button_daenerys, button_sansa, button_arya, button_caetlyn, button_jon, button_tyrion, button_eddard  
+buttons()
 # Run the app
 root.mainloop()
