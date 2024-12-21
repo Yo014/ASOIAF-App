@@ -16,10 +16,13 @@ from PIL import Image, ImageTk
 root = tk.Tk()
 root.geometry("600x600")
 
-image_path = "C:/Users/emuki/OneDrive/Desktop/projects/ASOIF-App/character_profile/Png Files/Catelyn_Stark.png"
+image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/character_profile/Png Files/Catelyn_Stark.png"
 image = Image.open(image_path)
-photo = ImageTk.PhotoImage(image)
+resized_image = image.resize((100, 100))  #Resize image to fit the UI
+photo = ImageTk.PhotoImage(resized_image)  #Convert to PhotoImage
+
 Button = tk.Button(root, text="Click Me", image=photo)
+Button.image=photo
 # Define button action
 def on_button_click():
     print("Button clicked!")

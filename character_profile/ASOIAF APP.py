@@ -1,7 +1,7 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 
-class CharacterProfileViewer:
+class CharacterProfileBookI:
     def __init__(self, root):
         """
         Initialize the Character Profile Viewer interface.
@@ -188,7 +188,7 @@ class CharacterProfileViewer:
         """
         try:
             ##image_path = f"/Users/santomukiza/Desktop/test/character_profile/Png Files/{image_name}"
-            image_path=f"C:/Users/emuki/OneDrive/Desktop/projects/ASOIF-App/character_profile/Png Files/{image_name}"
+            image_path=f"C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/character_profile/Png Files/{image_name}"
             pil_image = Image.open(image_path).resize((150, 160))
             tk_image = ImageTk.PhotoImage(pil_image)
             self.image_label.config(image=tk_image)
@@ -197,7 +197,63 @@ class CharacterProfileViewer:
             print(f"Error loading image: {e}")
             self.update_text_box("\n[Image could not be loaded.]")
 
+class MainMenuPage:
+    """
+    The main menu page of the application. This class creates a window with
+    buttons that can be used to navigate to different parts of the application.
+    """
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Main Menu")
+        self.root.geometry("600x600")
+        self.root.configure(bg="light blue")
+        self.create_buttons()
+
+    def create_buttons(self):
+        """
+        Creates buttons dynamically for different books in the ASOIAF series.
+        This method reads the button configuration from a predefined dictionary,
+        loads the corresponding images, resizes them, and creates buttons with
+        the specified commands and positions. The buttons are then placed on the
+        root window.
+        """
+        button_config = {
+            "A Game of Thrones": {
+                "image_path": "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/character_profile/Png Files/A_Game_of_Thrones.png",
+                "command": self.open_character_profile_viewer,
+                "position": (10, 50)
+            }, 
+            "A Clash of Kings": {
+                "image_path": "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/character_profile/Png Files/A_Clash_of_Kings.png",
+                "command": self.open_character_profile_viewer,
+                "position": (200, 50)
+            }
+        }
+        
+        # Create buttons dynamically
+        for key, config in button_config.items():
+
+            image = Image.open(config["image_path"])
+            resized_image = image.resize((150, 190))  # Resize the image
+            photo = ImageTk.PhotoImage(resized_image)
+            
+            button = tk.Button(self.root, image=photo, command=config["command"], borderwidth=0)
+            button.image = photo  # Keep a reference
+            button.place(x=config["position"][0], y=config["position"][1])
+
+
+
+    def open_character_profile_viewer(self):
+        """
+        Opens the character profile viewer window when a button is clicked.
+        This method destroys the current window and creates a new one with the
+        character profile viewer interface.
+        """
+        self.root.destroy()
+        new_root = tk.Tk()
+        CharacterProfileBookI(new_root)
+        new_root.mainloop()
 if __name__ == "__main__":
     root = tk.Tk()
-    app = CharacterProfileViewer(root)
+    app = MainMenuPage(root)
     root.mainloop()
