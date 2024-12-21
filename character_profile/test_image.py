@@ -14,13 +14,18 @@ import tkinter as tk
 from PIL import Image, ImageTk
 
 root = tk.Tk()
+root.geometry("600x600")
 
-image_path = "/Users/santomukiza/Desktop/test/character_profile/eddard_stark.png"
+image_path = "C:/Users/emuki/OneDrive/Desktop/projects/ASOIF-App/character_profile/Png Files/Catelyn_Stark.png"
 image = Image.open(image_path)
 photo = ImageTk.PhotoImage(image)
+Button = tk.Button(root, text="Click Me", image=photo)
+# Define button action
+def on_button_click():
+    print("Button clicked!")
 
-label = tk.Label(root, image=photo)
-label.image = photo  # keep a reference to prevent garbage collection
-label.pack()
-
+# Create button with image
+button = tk.Button(root, image=photo, command=on_button_click, borderwidth=0)
+button.image = photo  # Keep a reference to avoid garbage collection
+button.pack()
 root.mainloop()

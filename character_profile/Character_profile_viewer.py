@@ -125,7 +125,10 @@ def display_profile(character_profile):
 
 def update_image(character_profile):
     try:
-        image_path = f"/Users/santomukiza/Desktop/test/character_profile/Png Files/{character_profile['Image']}"
+        ## for mac
+        ##image_path = f"/Users/santomukiza/Desktop/test/character_profile/Png Files/{character_profile['Image']}"
+        ## For pc
+        image_path=f"C:/Users/emuki/OneDrive/Desktop/projects/ASOIF-App/character_profile/Png Files/{character_profile['Image']}"
         pil_image = Image.open(image_path)  # Load the image using Pillow
         resized_image = pil_image.resize((160, 200))  #Resize image to fit the UI
         tk_image = ImageTk.PhotoImage(resized_image)  #Convert to PhotoImage
@@ -145,44 +148,44 @@ def update_text_box(profile_text):
 # Tkinter setup
 root = tk.Tk()
 root.title("Character Profile Viewer")
-root.geometry("600x600")  # Set window size
+root.geometry("555x600")  # Set window size
 root.configure(bg="light blue")
 # Image display area
 image_label = tk.Label(root)
 image_label = tk.Label(root, bg="light blue")
 image_label.pack(pady=10)
 # Profile display area
-text_box = tk.Text(root, wrap=tk.WORD, width=80, height=15, state="disabled")
+text_box = tk.Text(root, wrap=tk.WORD, width=65, height=10, state="disabled")
 text_box.pack(pady=5)
 text_box.place(x=15, y=220)
 
 
 def buttons():
-    button_bg = "light blue"
+    button_bg = "white"
 
 # Button to load the profile
-    button_eddard = tk.Button(root, text="Eddard Stark", command=show_profile1,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0, )
+    button_eddard = tk.Button(root, text="Eddard Stark", command=show_profile1,bg=button_bg, fg="black")## borderwidth=0 ##highlightthickness=0, )
     button_eddard.place(x=470, y=450)
     
-    button_tyrion = tk.Button(root, text="Tyrion Lannister", command=show_profile2,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_tyrion = tk.Button(root, text="Tyrion Lannister", command=show_profile2,bg=button_bg, fg="black") ##borderwidth=0, highlightthickness=0)
     button_tyrion.place(x=20, y=450)
 
-    button_jon = tk.Button(root, text="Jon Snow", command=show_profile3,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_jon = tk.Button(root, text="Jon Snow", command=show_profile3,bg=button_bg, fg="black")## borderwidth=0, highlightthickness=0)
     button_jon.place(x=263, y=450)
 
-    button_caetlyn = tk.Button(root, text="Catelyn Stark", command=show_profile4,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_caetlyn = tk.Button(root, text="Catelyn Stark", command=show_profile4,bg=button_bg, fg="black")## borderwidth=0, highlightthickness=0)
     button_caetlyn.place(x=263, y=500)
 
-    button_arya = tk.Button(root, text="Arya Stark", command=show_profile5,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_arya = tk.Button(root, text="Arya Stark", command=show_profile5,bg=button_bg, fg="black")## borderwidth=0, highlightthickness=0)
     button_arya.place(x=470, y=500)
 
-    button_daenerys = tk.Button(root, text="Daenerys Targaryen", command=show_profile7,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_daenerys = tk.Button(root, text="Daenerys Targaryen", command=show_profile7,bg=button_bg, fg="black",)## borderwidth=0, highlightthickness=0)
     button_daenerys.place(x=20, y=500)
 
-    button_sansa = tk.Button(root, text="Sansa Stark", command=show_profile6,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_sansa = tk.Button(root, text="Sansa Stark", command=show_profile6,bg=button_bg, fg="black")## borderwidth=0, highlightthickness=0)
     button_sansa.place(x=160, y=550)
 
-    button_bran = tk.Button(root, text="Bran Stark", command=show_profile8,bg=button_bg, fg="black", borderwidth=0, highlightthickness=0)
+    button_bran = tk.Button(root, text="Bran Stark", command=show_profile8,bg=button_bg, fg="black")## borderwidth=0, highlightthickness=0)
     button_bran.place(x=350, y=550) 
     
     return button_bran, button_daenerys, button_sansa, button_arya, button_caetlyn, button_jon, button_tyrion, button_eddard  
