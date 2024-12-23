@@ -38,7 +38,11 @@ class BookInfo_BookI:
             button = tk.Button(self.root, text=config["name"], command=config["command"], bg="WHITE", width=config["width"], height= config["height"], font=("Arial", 20))
             button.place(x=config["position"][0], y=config["position"][1])
     def show_pov_characters(self):
-        pass
+        self.root.destroy()
+        new_root = tk.Tk()
+        from POV_Characters import POVCharactersBookI
+        POVCharactersBookI(new_root)
+        new_root.mainloop()
 
     def show_book_summary(self):
         pass
@@ -50,7 +54,11 @@ class BookInfo_BookI:
         CharacterProfileBookI(new_root)
         new_root.mainloop()
     def show_map(self):
-        pass
+        self.root.destroy()
+        new_root = tk.Tk()
+        from Map import MapsofASOIAF
+        MapsofASOIAF(new_root)
+        new_root.mainloop()
     def show_appendix(self):
         pass
     def getback(self):
@@ -97,7 +105,11 @@ class BookInfo_BookII:
             button = tk.Button(self.root, text=config["name"], command=config["command"], bg="WHITE", width=config["width"], height= config["height"], font=("Arial", 20))
             button.place(x=config["position"][0], y=config["position"][1])
     def show_pov_characters(self):
-        pass
+        self.root.destroy()
+        new_root = tk.Tk()
+        from POV_Characters import POVCharactersBookII
+        POVCharactersBookII(new_root)
+        new_root.mainloop()
 
     def show_book_summary(self):
         pass
