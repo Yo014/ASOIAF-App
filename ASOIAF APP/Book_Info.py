@@ -45,7 +45,11 @@ class BookInfo_BookI:
         new_root.mainloop()
 
     def show_book_summary(self):
-        pass
+        self.root.destroy()
+        new_root = tk.Tk()
+        from Book_Summary import BookSummary_BookI
+        BookSummary_BookI(new_root)
+        new_root.mainloop()
 
     def show_character_profiles(self):
         self.root.destroy()

@@ -17,41 +17,34 @@ class CharacterProfileBookI:
         """
         self.root = root
         self.root.title("Character Profile Viewer")
-        self.root.geometry("600x600")
+        self.root.geometry("555x600")
         self.root.configure(bg="light blue")
         
         # Initialize GUI components
         self.image_label = tk.Label(root, bg="light blue")
-        self.image_label.place(x=230, y=20)  # Adjust placement
+        self.image_label.place(x=230, y=10)  # Adjust placement
         
-        self.text_box = tk.Text(root, wrap=tk.WORD, width=65, height=10, state="disabled")
+        self.text_box = tk.Text(root, wrap=tk.WORD, width=65, height=15, state="disabled")
         self.text_box.place(x=15, y=200)
         
         # Add buttons to the interface
         self.create_buttons()
-
     def create_buttons(self):
-        button_config = {
-            "Tyrion Lannister": self.show_profile_tyrion,
-            "Jon Snow": self.show_profile_jon,
-            "Eddard Stark": self.show_profile_eddard,
-            "Daenerys Targaryen": self.show_profile_daenerys,
-            "Catelyn Stark": self.show_profile_catelyn,
-            "Arya Stark": self.show_profile_arya,
-            "Sansa Stark": self.show_profile_sansa,
-            "Bran Stark": self.show_profile_bran,
-            "Back": self.getback
-        }
-        
-        # Define button positions
-        positions = [
-            (20, 400), (263, 400), (470, 400), (20, 450),
-            (263, 450), (470, 450), (160, 500), (350, 500),(20,30)
-        ]
-        
-        for (text, command), (x, y) in zip(button_config.items(), positions):
-            button = tk.Button(self.root, text=text, command=command, bg="WHITE", relief=tk.FLAT)
-            button.place(x=x, y=y)
+            button_config = {
+                "Tyrion Lannister": {"command": self.show_profile_tyrion, "position": (18, 446), "width": 18, "height": 2},
+                "Jon Snow": {"command": self.show_profile_jon, "position": (189, 446), "width": 19, "height": 2},
+                "Eddard Stark": {"command": self.show_profile_eddard, "position": (369, 446), "width": 18, "height": 2},
+                "Daenerys Targaryen": {"command": self.show_profile_daenerys, "position": (18, 496), "width": 18, "height": 2},
+                "Catelyn Stark": {"command": self.show_profile_catelyn, "position": (189, 496), "width": 19, "height": 2},
+                "Arya Stark": {"command": self.show_profile_arya, "position": (369, 496), "width": 18, "height": 2},
+                "Sansa Stark": {"command": self.show_profile_sansa, "position": (18, 547), "width": 28, "height": 2},
+                "Bran Stark": {"command": self.show_profile_bran, "position": (279, 547), "width": 28, "height": 2},
+                "Back": {"command": self.getback, "position": (20, 30), "width": 10, "height": 1}
+            }
+            
+            for text, config in button_config.items():
+                button = tk.Button(self.root, text=text, command=config["command"], bg="WHITE",  font=("Arial", 13), width=config["width"], height=config["height"])
+                button.place(x=config["position"][0], y=config["position"][1])
 ##TO DO : UPDATE WITH THE ACTUAL CHARACTERS DESCRIPTIONS FOR A GAME OF THRONES BOOK I
     def get_character_profiles(self):
         """
@@ -190,7 +183,7 @@ class CharacterProfileBookI:
         try:
             ##image_path = f"/Users/santomukiza/Desktop/test/character_profile/Png Files/{image_name}"
             image_path=f"C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/{image_name}"
-            pil_image = Image.open(image_path).resize((150, 160))
+            pil_image = Image.open(image_path).resize((150, 190))
             tk_image = ImageTk.PhotoImage(pil_image)
             self.image_label.config(image=tk_image)
             self.image_label.image = tk_image
