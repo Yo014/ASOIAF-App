@@ -32,7 +32,22 @@ class MainMenuPage:
                 "image_path": "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Clash_of_Kings.png",
                 "command": self.open_book_infoBookII,
                 "position": (200, 50)
-            }
+            },
+            "A Storm of Swords": {
+                "image_path": "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Storm_Of_Swords.png",
+                "command": self.open_book_infoBookIII,
+                "position": (400, 50)
+            },
+            "A Feast for Crows": {
+                "image_path": "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Feast_for_Crows.png",
+                "command": self.open_book_infoBookIV,
+                "position": (100, 280)
+            },
+            "A Dance with Dragons": {
+                "image_path": "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Dance_with_Dragons.png",
+                "command": self.open_book_infoBookV,
+                "position": (300, 280)
+                }
         }
         
         # Create buttons dynamically
@@ -65,6 +80,33 @@ class MainMenuPage:
         new_root = tk.Tk()
         from Book_Info import BookInfo_BookII
         BookInfo_BookII(new_root)
+        new_root.mainloop()
+    def open_book_infoBookIII(self):
+        """
+        Opens the book information page when a book button is clicked.
+        """
+        self.root.destroy()
+        new_root = tk.Tk()
+        from Book_Info import BookInfo_BookIII
+        BookInfo_BookIII(new_root)
+        new_root.mainloop()
+    def open_book_infoBookIV(self):
+        """
+        Opens the book information page when a book button is clicked.
+        """
+        self.root.destroy()
+        new_root = tk.Tk()
+        from Book_Info import BookInfo_BookIV
+        BookInfo_BookIV(new_root)
+        new_root.mainloop()
+    def open_book_infoBookV(self):
+        """ 
+        Opens the book information page when a book button is clicked.
+        """
+        self.root.destroy()
+        new_root = tk.Tk()  
+        from Book_Info import BookInfo_BookV
+        BookInfo_BookV(new_root)
         new_root.mainloop()
 if __name__ == "__main__":
     root = tk.Tk()
