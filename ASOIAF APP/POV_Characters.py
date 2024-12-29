@@ -60,7 +60,11 @@ class POVCharactersBookI:
     def show_daenerys_Chapters(self):
         pass
     def show_arya_Chapters(self):
-        pass
+        self.root.destroy()
+        new_root = tk.Tk()
+        from Arya import AryaBookI
+        AryaBookI(new_root)
+        new_root.mainloop()
     def show_sansa_Chapters(self):
         pass
     def show_bran_Chapters(self):

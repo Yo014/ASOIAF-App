@@ -64,7 +64,11 @@ class BookInfo_BookI:
         MapsofASOIAF(new_root)
         new_root.mainloop()
     def show_appendix(self):
-        pass
+        self.root.destroy()
+        new_root = tk.Tk()
+        from Appendix import AppendixBookI
+        AppendixBookI(new_root)
+        new_root.mainloop()
     def getback(self):
         self.root.destroy()
         new_root = tk.Tk()
