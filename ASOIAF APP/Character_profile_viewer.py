@@ -1,4 +1,4 @@
-import tkinter as tk
+import customtkinter as ctk
 from PIL import Image, ImageTk
 
 class CharacterProfileBookI:
@@ -8,7 +8,7 @@ class CharacterProfileBookI:
 
         Parameters
         ----------
-        root : tkinter.Tk
+        root : ctk.CTk
             The root window of the application.
 
         Returns
@@ -21,48 +21,33 @@ class CharacterProfileBookI:
         self.root.configure(bg="light blue")
         
         # Initialize GUI components
-        self.image_label = tk.Label(root, bg="light blue")
+        self.image_label = ctk.CTkLabel(root, text="", fg_color="light blue")
         self.image_label.place(x=230, y=10)  # Adjust placement
         
-        self.text_box = tk.Text(root, wrap=tk.WORD, width=65, height=15, state="disabled")
+        self.text_box = ctk.CTkTextbox(root, wrap="word", width=500, height=230, state="disabled")
         self.text_box.place(x=15, y=200)
         
         # Add buttons to the interface
         self.create_buttons()
-    def create_buttons(self):
-            button_config = {
-                "Tyrion Lannister": {"command": self.show_profile_tyrion, "position": (18, 446), "width": 18, "height": 2},
-                "Jon Snow": {"command": self.show_profile_jon, "position": (189, 446), "width": 19, "height": 2},
-                "Eddard Stark": {"command": self.show_profile_eddard, "position": (369, 446), "width": 18, "height": 2},
-                "Daenerys Targaryen": {"command": self.show_profile_daenerys, "position": (18, 496), "width": 18, "height": 2},
-                "Catelyn Stark": {"command": self.show_profile_catelyn, "position": (189, 496), "width": 19, "height": 2},
-                "Arya Stark": {"command": self.show_profile_arya, "position": (369, 496), "width": 18, "height": 2},
-                "Sansa Stark": {"command": self.show_profile_sansa, "position": (18, 547), "width": 28, "height": 2},
-                "Bran Stark": {"command": self.show_profile_bran, "position": (279, 547), "width": 28, "height": 2},
-                "Back": {"command": self.getback, "position": (20, 30), "width": 10, "height": 1}
-            }
-            
-            for text, config in button_config.items():
-                button = tk.Button(self.root, text=text, command=config["command"], bg="WHITE",  font=("Arial", 13), width=config["width"], height=config["height"])
-                button.place(x=config["position"][0], y=config["position"][1])
-##TO DO : UPDATE WITH THE ACTUAL CHARACTERS DESCRIPTIONS FOR A GAME OF THRONES BOOK I
-    def get_character_profiles(self):
-        """
-        Returns a dictionary containing character profiles for various 
-        characters from the 'Game of Thrones' series.
 
-        Each character profile contains the following information:
-        - Name: The full name of the character.
-        - House: The noble house to which the character belongs.
-        - Titles: A list of titles held by the character.
-        - Bio: A brief biography of the character.
-        - Image: The filename of the character's image.
-        
-        Returns:
-            dict: A dictionary where keys are character names and values 
-            are dictionaries containing profile information.
-        """
-        # Store profiles for all characters in a dictionary
+    def create_buttons(self):
+        button_config = {
+            "Tyrion Lannister": {"command": self.show_profile_tyrion, "position": (18, 446)},
+            "Jon Snow": {"command": self.show_profile_jon, "position": (189, 446)},
+            "Eddard Stark": {"command": self.show_profile_eddard, "position": (369, 446)},
+            "Daenerys Targaryen": {"command": self.show_profile_daenerys, "position": (18, 496)},
+            "Catelyn Stark": {"command": self.show_profile_catelyn, "position": (189, 496)},
+            "Arya Stark": {"command": self.show_profile_arya, "position": (369, 496)},
+            "Sansa Stark": {"command": self.show_profile_sansa, "position": (18, 547)},
+            "Bran Stark": {"command": self.show_profile_bran, "position": (279, 547)},
+            "Back": {"command": self.getback, "position": (20, 30)}
+        }
+
+        for text, config in button_config.items():
+            button = ctk.CTkButton(self.root, text=text, command=config["command"], width=120, height=40)
+            button.place(x=config["position"][0], y=config["position"][1])
+
+    def get_character_profiles(self):
         return {
             "Eddard Stark": {
                 "Name": "Eddard Stark",
@@ -123,7 +108,6 @@ class CharacterProfileBookI:
             }
         }
 
-    # Functions to display profiles
     def show_profile_eddard(self): self.display_profile("Eddard Stark")
     def show_profile_tyrion(self): self.display_profile("Tyrion Lannister")
     def show_profile_jon(self): self.display_profile("Jon Snow")
@@ -134,14 +118,6 @@ class CharacterProfileBookI:
     def show_profile_bran(self): self.display_profile("Bran Stark")
 
     def display_profile(self, character_name):
-        """
-        Displays the profile of a given character.
-        Args:
-            character_name (str): The name of the character whose profile is to be displayed.
-        Retrieves the character profiles, extracts the profile for the specified character,
-        formats the profile information into a text string, and updates the text box and image
-        with the character's profile information.
-        """
         profiles = self.get_character_profiles()
         character_profile = profiles[character_name]
         profile_text = f"Name: {character_profile['Name']}\n" \
@@ -153,46 +129,25 @@ class CharacterProfileBookI:
         self.update_image(character_profile['Image'])
 
     def update_text_box(self, text):
-        """
-        Update the text box with the provided text.
-
-        Parameters
-        ----------
-        text : str
-            The text to be displayed in the text box.
-
-        Returns
-        -------
-        None
-        """
-        self.text_box.config(state="normal")
-        self.text_box.delete(1.0, tk.END)
-        self.text_box.insert(tk.END, text)
-        self.text_box.config(state="disabled")
+        self.text_box.configure(state="normal")
+        self.text_box.delete("1.0", "end")
+        self.text_box.insert("end", text)
+        self.text_box.configure(state="disabled")
 
     def update_image(self, image_name):
-        """
-        Updates the image displayed in the character profile.
-
-        Args:
-            image_name (str): The name of the image file to be loaded.
-
-        Raises:
-            Exception: If there is an error loading the image, it prints an error message and updates the text box with a failure message.
-        """
         try:
-            ##image_path = f"/Users/santomukiza/Desktop/test/character_profile/Png Files/{image_name}"
-            image_path=f"C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/{image_name}"
-            pil_image = Image.open(image_path).resize((150, 190))
-            tk_image = ImageTk.PhotoImage(pil_image)
-            self.image_label.config(image=tk_image)
-            self.image_label.image = tk_image
+            image_path = f"C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/{image_name}"
+            image = Image.open(image_path).resize((150, 190))
+            photo = ImageTk.PhotoImage(image)
+            self.image_label.configure(image=photo)
+            self.image_label.image = photo
         except Exception as e:
             print(f"Error loading image: {e}")
             self.update_text_box("\n[Image could not be loaded.]")
+
     def getback(self):
         self.root.destroy()
-        new_root = tk.Tk()
+        new_root = ctk.CTk()
         from Book_Info import BookInfo_BookI
         BookInfo_BookI(new_root)
         new_root.mainloop()

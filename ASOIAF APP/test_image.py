@@ -10,25 +10,29 @@
 
 # # Profile display area\
 # root.mainloop()
-import tkinter as tk
-from PIL import Image, ImageTk
 
-root = tk.Tk()
+
+import customtkinter as ctk
+from PIL import Image
+
+root = ctk.CTk()
 root.geometry("600x600")
 
-image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/character_profile/Png Files/Catelyn_Stark.png"
+image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/Catelyn_Stark.png"
 image = Image.open(image_path)
-resized_image = image.resize((100, 100))  #Resize image to fit the UI
-photo = ImageTk.PhotoImage(resized_image)  #Convert to PhotoImage
+resized_image = image.resize((100, 100))  # Resize image to fit the UI
+photo = ctk.CTkImage(light_image=resized_image, dark_image=resized_image, size=(300, 462))  # Convert to CTkImage
 
-Button = tk.Button(root, text="Click Me", image=photo)
-Button.image=photo
 # Define button action
 def on_button_click():
-    print("Button clicked!")
+    root.destroy()
+    from Book_Summary import BookSummary_BookI
+    new_root = ctk.CTk()
+    BookSummary_BookI(new_root)
+    new_root.mainloop()
 
 # Create button with image
-button = tk.Button(root, image=photo, command=on_button_click, borderwidth=0)
-button.image = photo  # Keep a reference to avoid garbage collection
+button = ctk.CTkButton(root, text="" ,image=photo, command=on_button_click,height=100, width=100,fg_color="transparent",bg_color="transparent", hover=False)
+button.image=photo
 button.pack()
 root.mainloop()

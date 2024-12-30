@@ -1,6 +1,12 @@
 import tkinter as tk
-from PIL import Image, ImageTk
+import customtkinter as ctk
+from PIL import Image
 
+# Disable animations and scaling
+ctk.deactivate_automatic_dpi_awareness()
+ctk.set_appearance_mode("dark")
+ctk.set_widget_scaling(1.0)
+ctk.deactivate_automatic_dpi_awareness()
 
 class MainMenuPage:
     """
@@ -10,8 +16,10 @@ class MainMenuPage:
     def __init__(self, root):
         self.root = root
         self.root.title("Main Menu")
+        ctk.set_default_color_theme("dark-blue")
         self.root.geometry("555x600")
-        self.root.configure(bg="light blue")
+        ctk.deactivate_automatic_dpi_awareness()
+
         self.create_buttons()
 
     def create_buttons(self):
@@ -36,7 +44,7 @@ class MainMenuPage:
             "A Storm of Swords": {
                 "image_path": "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Storm_Of_Swords.png",
                 "command": self.open_book_infoBookIII,
-                "position": (400, 50)
+                "position": (380, 50)
             },
             "A Feast for Crows": {
                 "image_path": "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Feast_for_Crows.png",
@@ -55,60 +63,75 @@ class MainMenuPage:
 
             image = Image.open(config["image_path"])
             resized_image = image.resize((150, 190))  # Resize the image
-            photo = ImageTk.PhotoImage(resized_image)
+            ctk_image = ctk.CTkImage(resized_image, size=(150, 190))  # Convert to CTkImage
             
-            button = tk.Button(self.root, image=photo, command=config["command"], borderwidth=0)
-            button.image = photo  # Keep a reference
+            button = ctk.CTkButton(self.root, image=ctk_image, command=config["command"], text="",fg_color="transparent",bg_color="transparent")
             button.place(x=config["position"][0], y=config["position"][1])
 
-
+    def cancel_pending_callbacks(self):
+        try:
+            for widget in self.root.winfo_children():
+                widget.after_cancel('all')  # Cancel animations for each widget
+        except Exception as e:
+            print(f"Error while canceling callbacks: {e}")
 
     def open_book_infoBookI(self):
         """
         Opens the book information page when a book button is clicked.
         """
+        self.cancel_pending_callbacks()
         self.root.destroy()
-        new_root = tk.Tk()
+        self.root.update()
+        new_root = ctk.CTk()
         from Book_Info import BookInfo_BookI
         BookInfo_BookI(new_root)
         new_root.mainloop()
+
     def open_book_infoBookII(self):
         """
         Opens the book information page when a book button is clicked.
         """
+        self.cancel_pending_callbacks()
         self.root.destroy()
-        new_root = tk.Tk()
+        new_root = ctk.CTk()
         from Book_Info import BookInfo_BookII
         BookInfo_BookII(new_root)
         new_root.mainloop()
+
     def open_book_infoBookIII(self):
         """
         Opens the book information page when a book button is clicked.
         """
+        self.cancel_pending_callbacks()
         self.root.destroy()
-        new_root = tk.Tk()
+        new_root = ctk.CTk()
         from Book_Info import BookInfo_BookIII
         BookInfo_BookIII(new_root)
         new_root.mainloop()
+
     def open_book_infoBookIV(self):
         """
         Opens the book information page when a book button is clicked.
         """
+        self.cancel_pending_callbacks()
         self.root.destroy()
-        new_root = tk.Tk()
+        new_root = ctk.CTk()
         from Book_Info import BookInfo_BookIV
         BookInfo_BookIV(new_root)
         new_root.mainloop()
+
     def open_book_infoBookV(self):
-        """ 
+        """
         Opens the book information page when a book button is clicked.
         """
+        self.cancel_pending_callbacks()
         self.root.destroy()
-        new_root = tk.Tk()  
+        new_root = ctk.CTk()
         from Book_Info import BookInfo_BookV
         BookInfo_BookV(new_root)
         new_root.mainloop()
+
 if __name__ == "__main__":
-    root = tk.Tk()
+    root = ctk.CTk()
     app = MainMenuPage(root)
     root.mainloop()

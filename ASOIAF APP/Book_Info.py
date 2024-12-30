@@ -1,320 +1,480 @@
-import tkinter as tk
+import customtkinter as ctk
 from PIL import Image, ImageTk
+import tkinter as tk
 
 class BookInfo_BookI:
     def __init__(self, root):
+        # Initialize Main Window
         self.root = root
         self.root.title("Book Information")
         self.root.geometry("555x600")
-        self.root.configure(bg="light blue")
+        self.root.resizable(width=False, height=False)
         
-        # Initialize GUI components
-        self.image_label = tk.Label(root, bg="light blue")
-        self.image_label.place(x=210, y=20)  # Adjust placement
-        image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Game_of_Thrones.png"
-        image = Image.open(image_path)
-        resized_image = image.resize((150, 190))  # Resize the image
-        photo = ImageTk.PhotoImage(resized_image)
-        self.image_label.config(image=photo)
-        self.image_label.image = photo
-        
-        # Add buttons to the interface
+        # GUI Components
+        self.create_image()
         self.create_buttons()
 
-    def create_buttons(self):
-        button_config={
-            "POV Characters": {"name": "POV Characters","command": self.show_pov_characters, "position": (0, 230), "width": 17, "height": 3},
-            "Book Summary": {"name": "Book Summary","command": self.show_book_summary, "position": (282, 230), "width": 17, "height": 3},
-            "Character Profiles": {"name": "Character Profiles","command": self.show_character_profiles, "position": (0, 350), "width": 17, "height": 3},
-            "Map": {"name": "Map","command": self.show_map, "position": (282, 350), "width": 17, "height": 3},
-            "Appendix": {"name": "Appendix","command": self.show_appendix, "position": (0, 472), "width": 34, "height": 4},
-            
-            
-        }
-        button_back= tk.Button(self.root, text="Back", command=self.getback, bg="WHITE", relief=tk.FLAT,)
-        button_back.place(x=20, y=30)
-        for  key, config in button_config.items():
+    def create_image(self):
+        """Display Book Cover Image."""
+        image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Game_of_Thrones.png"
+        image = Image.open(image_path)
+        resized_image = image.resize((150, 190))
+        photo = ctk.CTkImage(resized_image, size=(150, 190))
 
-            button = tk.Button(self.root, text=config["name"], command=config["command"], bg="WHITE", width=config["width"], height= config["height"], font=("Arial", 20))
-            button.place(x=config["position"][0], y=config["position"][1])
+        # Display Image
+        self.image_label = ctk.CTkLabel(self.root, image=photo, text="")
+        self.image_label.place(x=210, y=20)
+        self.image_label.image = photo
+
+    def create_buttons(self):
+        """Create Buttons for Navigation."""
+        button_config = {
+            "POV Characters": {"command": self.show_pov_characters, "position": (0, 230), "width": 180, "height": 50},
+            "Book Summary": {"command": self.show_book_summary, "position": (282, 230), "width": 180, "height": 50},
+            "Character Profiles": {"command": self.show_character_profiles, "position": (0, 350), "width": 180, "height": 50},
+            "Map": {"command": self.show_map, "position": (282, 350), "width": 180, "height": 50},
+            "Appendix": {"command": self.show_appendix, "position": (140, 472), "width": 250, "height": 50},
+        }
+
+        # Create Back Button
+        button_back = ctk.CTkButton(
+            self.root, text="Back", command=self.getback,
+            width=80, height=30, fg_color="white", text_color="black", corner_radius=8
+        )
+        button_back.place(x=20, y=30)
+
+        # Create Main Buttons
+        for key, config in button_config.items():
+            ctk.CTkButton(
+                self.root, text=key, command=config["command"],
+                width=config["width"], height=config["height"],
+                corner_radius=10, fg_color="white", text_color="black", hover_color="#d1e7f0"
+            ).place(x=config["position"][0], y=config["position"][1])
+
+    # Navigation Methods
     def show_pov_characters(self):
-        self.root.destroy()
-        new_root = tk.Tk()
-        from POV_Characters import POVCharactersBookI
-        POVCharactersBookI(new_root)
-        new_root.mainloop()
+        """Navigate to POV Characters."""
+        self.switch_window("POV_Characters", "POVCharactersBookI")
 
     def show_book_summary(self):
-        self.root.destroy()
-        new_root = tk.Tk()
-        from Book_Summary import BookSummary_BookI
-        BookSummary_BookI(new_root)
-        new_root.mainloop()
+        """Navigate to Book Summary."""
+        self.switch_window("Book_Summary", "BookSummary_BookI", customtkinter=True)
 
     def show_character_profiles(self):
-        self.root.destroy()
-        new_root = tk.Tk()
-        from Character_profile_viewer import CharacterProfileBookI
-        CharacterProfileBookI(new_root)
-        new_root.mainloop()
+        """Navigate to Character Profiles."""
+        self.switch_window("Character_profile_viewer", "CharacterProfileBookI")
+
     def show_map(self):
-        self.root.destroy()
-        new_root = tk.Tk()
-        from Map import MapsofASOIAF
-        MapsofASOIAF(new_root)
-        new_root.mainloop()
+        """Navigate to Maps."""
+        self.switch_window("Map", "MapsofASOIAF")
+
     def show_appendix(self):
-        self.root.destroy()
-        new_root = tk.Tk()
-        from Appendix import AppendixBookI
-        AppendixBookI(new_root)
-        new_root.mainloop()
+        """Navigate to Appendix."""
+        self.switch_window("Appendix", "AppendixBookI")
+
     def getback(self):
+        """Navigate Back to Main Menu."""
+        self.switch_window("ASOIAF_APP", "MainMenuPage")
+    
+    def cancel_pending_callbacks(self):
+        try:
+            for widget in self.root.winfo_children():
+                widget.after_cancel('all')  # Cancel animations for each widget
+        except Exception as e:
+            print(f"Error while canceling callbacks: {e}")
+
+    # Window Management Helper
+    def switch_window(self, module_name, class_name, customtkinter=False):
+        """Destroy current window and open a new one."""
+        self.cancel_pending_callbacks()
         self.root.destroy()
-        new_root = tk.Tk()
-        from ASOIAF_APP import MainMenuPage
-        MainMenuPage(new_root)
+        new_root = ctk.CTk()
+        module = __import__(module_name)
+        getattr(module, class_name)(new_root)
         new_root.mainloop()
+
+
 
 class BookInfo_BookII:
     def __init__(self, root):
+        # Initialize Main Window
         self.root = root
         self.root.title("Book Information")
         self.root.geometry("555x600")
-        self.root.configure(bg="light blue")
-        
-        # Initialize GUI components
-        self.image_label = tk.Label(root, bg="light blue")
-        self.image_label.place(x=210, y=20)  # Adjust placement
-        image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Clash_of_Kings.png"
-        image = Image.open(image_path)
-        resized_image = image.resize((150, 190))  # Resize the image
-        photo = ImageTk.PhotoImage(resized_image)
-        self.image_label.config(image=photo)
-        self.image_label.image = photo
-        
-        # Add buttons to the interface
+        self.root.resizable(width=False, height=False)
+
+        # GUI Components
+        self.create_image()
         self.create_buttons()
 
-    def create_buttons(self):
-        button_config={
-            "POV Characters": {"name": "POV Characters","command": self.show_pov_characters, "position": (0, 230), "width": 17, "height": 3},
-            "Book Summary": {"name": "Book Summary","command": self.show_book_summary, "position": (282, 230), "width": 17, "height": 3},
-            "Character Profiles": {"name": "Character Profiles","command": self.show_character_profiles, "position": (0, 350), "width": 17, "height": 3},
-            "Map": {"name": "Map","command": self.show_map, "position": (282, 350), "width": 17, "height": 3},
-            "Appendix": {"name": "Appendix","command": self.show_appendix, "position": (0, 472), "width": 34, "height": 4},
-            
-            
-        }
-        button_back= tk.Button(self.root, text="Back", command=self.getback, bg="WHITE", relief=tk.FLAT,)
-        button_back.place(x=20, y=30)
-        for  key, config in button_config.items():
+    def create_image(self):
+        """Display Book Cover Image."""
+        image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Clash_of_Kings.png"
+        image = Image.open(image_path)
+        resized_image = image.resize((150, 190))
+        photo = ctk.CTkImage(resized_image, size=(150, 190))
 
-            button = tk.Button(self.root, text=config["name"], command=config["command"], bg="WHITE", width=config["width"], height= config["height"], font=("Arial", 20))
-            button.place(x=config["position"][0], y=config["position"][1])
+        # Display Image
+        self.image_label = ctk.CTkLabel(self.root, image=photo, text="")
+        self.image_label.place(x=210, y=20)
+        self.image_label.image = photo
+
+    def create_buttons(self):
+        """Create Buttons for Navigation."""
+        button_config = {
+            "POV Characters": {"command": self.show_pov_characters, "position": (0, 230), "width": 180, "height": 50},
+            "Book Summary": {"command": self.show_book_summary, "position": (282, 230), "width": 180, "height": 50},
+            "Character Profiles": {"command": self.show_character_profiles, "position": (0, 350), "width": 180, "height": 50},
+            "Map": {"command": self.show_map, "position": (282, 350), "width": 180, "height": 50},
+            "Appendix": {"command": self.show_appendix, "position": (140, 472), "width": 250, "height": 50},
+        }
+
+        # Create Back Button
+        button_back = ctk.CTkButton(
+            self.root, text="Back", command=self.getback,
+            width=80, height=30, fg_color="white", text_color="black", corner_radius=8
+        )
+        button_back.place(x=20, y=30)
+
+        # Create Main Buttons
+        for key, config in button_config.items():
+            ctk.CTkButton(
+                self.root, text=key, command=config["command"],
+                width=config["width"], height=config["height"],
+                corner_radius=10, fg_color="white", text_color="black", hover_color="#d1e7f0"
+            ).place(x=config["position"][0], y=config["position"][1])
+
+    # Navigation Methods
     def show_pov_characters(self):
-        self.root.destroy()
-        new_root = tk.Tk()
-        from POV_Characters import POVCharactersBookII
-        POVCharactersBookII(new_root)
-        new_root.mainloop()
+        """Navigate to POV Characters."""
+        self.switch_window("POV_Characters", "POVCharactersBookII")
 
     def show_book_summary(self):
-        self.root.destroy()
-        new_root = tk.Tk()
-        from Book_Summary import BookSummary_BookII
-        BookSummary_BookII(new_root)
-        new_root.mainloop()
+        """Navigate to Book Summary."""
+        self.switch_window("Book_Summary", "BookSummary_BookII", customtkinter=True)
 
     def show_character_profiles(self):
-       pass
+        """Navigate to Character Profiles."""
+        self.switch_window("Character_profile_viewer", "CharacterProfileBookII")
+
     def show_map(self):
-        pass
+        """Navigate to Maps."""
+        self.switch_window("Map", "MapsofASOIAF")
+
     def show_appendix(self):
-        pass
+        """Navigate to Appendix."""
+        self.switch_window("Appendix", "AppendixBookII")
+
     def getback(self):
+        """Navigate Back to Main Menu."""
+        self.switch_window("ASOIAF_APP", "MainMenuPage")
+
+    def cancel_pending_callbacks(self):
+        try:
+            for widget in self.root.winfo_children():
+                widget.after_cancel('all')  # Cancel animations for each widget
+        except Exception as e:
+            print(f"Error while canceling callbacks: {e}")
+
+    # Window Management Helper
+    def switch_window(self, module_name, class_name, customtkinter=False):
+        """Destroy current window and open a new one."""
+        self.cancel_pending_callbacks()
         self.root.destroy()
-        new_root = tk.Tk()
-        from ASOIAF_APP import MainMenuPage
-        MainMenuPage(new_root)
+        if customtkinter:
+            new_root = ctk.CTk()
+        else:
+            new_root = tk.Tk()
+        module = __import__(module_name)
+        getattr(module, class_name)(new_root)
         new_root.mainloop()
+
 
 class BookInfo_BookIII:
     def __init__(self, root):
+        # Initialize Main Window
         self.root = root
         self.root.title("Book Information")
         self.root.geometry("555x600")
-        self.root.configure(bg="light blue")
-        
-        # Initialize GUI components
-        self.image_label = tk.Label(root, bg="light blue")
-        self.image_label.place(x=210, y=20)  # Adjust placement
+        self.root.resizable(width=False, height=False)
+
+        # GUI Components
+        self.create_image()
+        self.create_buttons()
+
+    def create_image(self):
+        """Display Book Cover Image."""
         image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Storm_Of_Swords.png"
         image = Image.open(image_path)
-        resized_image = image.resize((150, 190))  # Resize the image
-        photo = ImageTk.PhotoImage(resized_image)
-        self.image_label.config(image=photo)
+        resized_image = image.resize((150, 190))
+        photo = ctk.CTkImage(resized_image, size=(150, 190))
+
+        # Display Image
+        self.image_label = ctk.CTkLabel(self.root, image=photo, text="")
+        self.image_label.place(x=210, y=20)
         self.image_label.image = photo
-        
-        # Add buttons to the interface
-        self.create_buttons()
 
     def create_buttons(self):
-        button_config={
-            "POV Characters": {"name": "POV Characters","command": self.show_pov_characters, "position": (0, 230), "width": 17, "height": 3},
-            "Book Summary": {"name": "Book Summary","command": self.show_book_summary, "position": (282, 230), "width": 17, "height": 3},
-            "Character Profiles": {"name": "Character Profiles","command": self.show_character_profiles, "position": (0, 350), "width": 17, "height": 3},
-            "Map": {"name": "Map","command": self.show_map, "position": (282, 350), "width": 17, "height": 3},
-            "Appendix": {"name": "Appendix","command": self.show_appendix, "position": (0, 472), "width": 34, "height": 4},
-            
-            
+        """Create Buttons for Navigation."""
+        button_config = {
+            "POV Characters": {"command": self.show_pov_characters, "position": (0, 230), "width": 180, "height": 50},
+            "Book Summary": {"command": self.show_book_summary, "position": (282, 230), "width": 180, "height": 50},
+            "Character Profiles": {"command": self.show_character_profiles, "position": (0, 350), "width": 180, "height": 50},
+            "Map": {"command": self.show_map, "position": (282, 350), "width": 180, "height": 50},
+            "Appendix": {"command": self.show_appendix, "position": (140, 472), "width": 250, "height": 50},
         }
-        button_back= tk.Button(self.root, text="Back", command=self.getback, bg="WHITE", relief=tk.FLAT,)
-        button_back.place(x=20, y=30)
-        for  key, config in button_config.items():
 
-            button = tk.Button(self.root, text=config["name"], command=config["command"], bg="WHITE", width=config["width"], height= config["height"], font=("Arial", 20))
-            button.place(x=config["position"][0], y=config["position"][1])
+        # Create Back Button
+        button_back = ctk.CTkButton(
+            self.root, text="Back", command=self.getback,
+            width=80, height=30, fg_color="white", text_color="black", corner_radius=8
+        )
+        button_back.place(x=20, y=30)
+
+        # Create Main Buttons
+        for key, config in button_config.items():
+            ctk.CTkButton(
+                self.root, text=key, command=config["command"],
+                width=config["width"], height=config["height"],
+                corner_radius=10, fg_color="white", text_color="black", hover_color="#d1e7f0"
+            ).place(x=config["position"][0], y=config["position"][1])
+
+    # Navigation Methods
     def show_pov_characters(self):
-        self.root.destroy()
-        new_root = tk.Tk()
-        from POV_Characters import POVCharactersBookIII
-        POVCharactersBookIII(new_root)
-        new_root.mainloop()
+        """Navigate to POV Characters."""
+        self.switch_window("POV_Characters", "POVCharactersBookIII")
 
     def show_book_summary(self):
-        self.root.destroy()
-        new_root = tk.Tk()
-        from Book_Summary import BookSummary_BookIII
-        BookSummary_BookIII(new_root)
-        new_root.mainloop()
+        """Navigate to Book Summary."""
+        self.switch_window("Book_Summary", "BookSummary_BookIII")
 
     def show_character_profiles(self):
-       pass
+        """Navigate to Character Profiles."""
+        self.switch_window("Character_profile_viewer", "CharacterProfileBookIII")
+
     def show_map(self):
-        pass
+        """Navigate to Maps."""
+        self.switch_window("Map", "MapsofASOIAF")
+
     def show_appendix(self):
-        pass
+        """Navigate to Appendix."""
+        self.switch_window("Appendix", "AppendixBookIII")
+
     def getback(self):
+        """Navigate Back to Main Menu."""
+        self.switch_window("ASOIAF_APP", "MainMenuPage")
+
+    def cancel_pending_callbacks(self):
+        try:
+            for widget in self.root.winfo_children():
+                widget.after_cancel('all')  # Cancel animations for each widget
+        except Exception as e:
+            print(f"Error while canceling callbacks: {e}")
+
+    # Window Management Helper
+    def switch_window(self, module_name, class_name, customtkinter=False):
+        """Destroy current window and open a new one."""
+        self.cancel_pending_callbacks()
         self.root.destroy()
-        new_root = tk.Tk()
-        from ASOIAF_APP import MainMenuPage
-        MainMenuPage(new_root)
+        if customtkinter:
+            new_root = ctk.CTk()
+        else:
+            new_root = tk.Tk()
+        module = __import__(module_name)
+        getattr(module, class_name)(new_root)
         new_root.mainloop()
-        
+
+
 class BookInfo_BookIV:
     def __init__(self, root):
+        # Initialize Main Window
         self.root = root
         self.root.title("Book Information")
         self.root.geometry("555x600")
-        self.root.configure(bg="light blue")
-        
-        # Initialize GUI components
-        self.image_label = tk.Label(root, bg="light blue")
-        self.image_label.place(x=210, y=20)  # Adjust placement
-        image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Feast_for_Crows.png"
-        image = Image.open(image_path)
-        resized_image = image.resize((150, 190))  # Resize the image
-        photo = ImageTk.PhotoImage(resized_image)
-        self.image_label.config(image=photo)
-        self.image_label.image = photo
-        
-        # Add buttons to the interface
+        self.root.resizable(width=False, height=False)
+
+        # GUI Components
+        self.create_image()
         self.create_buttons()
 
-    def create_buttons(self):
-        button_config={
-            "POV Characters": {"name": "POV Characters","command": self.show_pov_characters, "position": (0, 230), "width": 17, "height": 3},
-            "Book Summary": {"name": "Book Summary","command": self.show_book_summary, "position": (282, 230), "width": 17, "height": 3},
-            "Character Profiles": {"name": "Character Profiles","command": self.show_character_profiles, "position": (0, 350), "width": 17, "height": 3},
-            "Map": {"name": "Map","command": self.show_map, "position": (282, 350), "width": 17, "height": 3},
-            "Appendix": {"name": "Appendix","command": self.show_appendix, "position": (0, 472), "width": 34, "height": 4},
-            
-            
-        }
-        button_back= tk.Button(self.root, text="Back", command=self.getback, bg="WHITE", relief=tk.FLAT,)
-        button_back.place(x=20, y=30)
-        for  key, config in button_config.items():
+    def create_image(self):
+        """Display Book Cover Image."""
+        image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Feast_for_Crows.png"
+        image = Image.open(image_path)
+        resized_image = image.resize((150, 190))
+        photo = ctk.CTkImage(resized_image, size=(150, 190))
 
-            button = tk.Button(self.root, text=config["name"], command=config["command"], bg="WHITE", width=config["width"], height= config["height"], font=("Arial", 20))
-            button.place(x=config["position"][0], y=config["position"][1])
+        # Display Image
+        self.image_label = ctk.CTkLabel(self.root, image=photo, text="")
+        self.image_label.place(x=210, y=20)
+        self.image_label.image = photo
+
+    def create_buttons(self):
+        """Create Buttons for Navigation."""
+        button_config = {
+            "POV Characters": {"command": self.show_pov_characters, "position": (0, 230), "width": 180, "height": 50},
+            "Book Summary": {"command": self.show_book_summary, "position": (282, 230), "width": 180, "height": 50},
+            "Character Profiles": {"command": self.show_character_profiles, "position": (0, 350), "width": 180, "height": 50},
+            "Map": {"command": self.show_map, "position": (282, 350), "width": 180, "height": 50},
+            "Appendix": {"command": self.show_appendix, "position": (140, 472), "width": 250, "height": 50},
+        }
+
+        # Create Back Button
+        button_back = ctk.CTkButton(
+            self.root, text="Back", command=self.getback,
+            width=80, height=30, fg_color="white", text_color="black", corner_radius=8
+        )
+        button_back.place(x=20, y=30)
+
+        # Create Main Buttons
+        for key, config in button_config.items():
+            ctk.CTkButton(
+                self.root, text=key, command=config["command"],
+                width=config["width"], height=config["height"],
+                corner_radius=10, fg_color="white", text_color="black", hover_color="#d1e7f0"
+            ).place(x=config["position"][0], y=config["position"][1])
+
+    # Navigation Methods
     def show_pov_characters(self):
-        pass
+        """Navigate to POV Characters."""
+        self.switch_window("POV_Characters", "POVCharactersBookIV")
 
     def show_book_summary(self):
-        self.root.destroy()
-        new_root = tk.Tk()
-        from Book_Summary import BookSummary_BookIV
-        BookSummary_BookIV(new_root)
-        new_root.mainloop()
+        """Navigate to Book Summary."""
+        self.switch_window("Book_Summary", "BookSummary_BookIV")
+
     def show_character_profiles(self):
-       pass
+        """Navigate to Character Profiles."""
+        self.switch_window("Character_profile_viewer", "CharacterProfileBookIV")
+
     def show_map(self):
-        pass
+        """Navigate to Maps."""
+        self.switch_window("Map", "MapsofASOIAF")
+
     def show_appendix(self):
-        pass
+        """Navigate to Appendix."""
+        self.switch_window("Appendix", "AppendixBookIV")
+
     def getback(self):
+        """Navigate Back to Main Menu."""
+        self.switch_window("ASOIAF_APP", "MainMenuPage")
+
+    def cancel_pending_callbacks(self):
+        try:
+            for widget in self.root.winfo_children():
+                widget.after_cancel('all')  # Cancel animations for each widget
+        except Exception as e:
+            print(f"Error while canceling callbacks: {e}")
+
+    # Window Management Helper
+    def switch_window(self, module_name, class_name, customtkinter=False):
+        """Destroy current window and open a new one."""
+        self.cancel_pending_callbacks()
         self.root.destroy()
-        new_root = tk.Tk()
-        from ASOIAF_APP import MainMenuPage
-        MainMenuPage(new_root)
+        if customtkinter:
+            new_root = ctk.CTk()
+        else:
+            new_root = tk.Tk()
+        module = __import__(module_name)
+        getattr(module, class_name)(new_root)
         new_root.mainloop()
 
 class BookInfo_BookV:
     def __init__(self, root):
+        # Initialize Main Window
         self.root = root
         self.root.title("Book Information")
         self.root.geometry("555x600")
-        self.root.configure(bg="light blue")
-        
+        self.root.resizable(width=False, height=False)
+        ctk.set_theme("dark")
+
         # Initialize GUI components
-        self.image_label = tk.Label(root, bg="light blue")
-        self.image_label.place(x=210, y=20)  # Adjust placement
-        image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Dance_With_Dragons.png"
-        image = Image.open(image_path)
-        resized_image = image.resize((150, 190))  # Resize the image
-        photo = ImageTk.PhotoImage(resized_image)
-        self.image_label.config(image=photo)
-        self.image_label.image = photo
-        
-        # Add buttons to the interface
+        self.create_image()
         self.create_buttons()
 
-    def create_buttons(self):
-        button_config={
-            "POV Characters": {"name": "POV Characters","command": self.show_pov_characters, "position": (0, 230), "width": 17, "height": 3},
-            "Book Summary": {"name": "Book Summary","command": self.show_book_summary, "position": (282, 230), "width": 17, "height": 3},
-            "Character Profiles": {"name": "Character Profiles","command": self.show_character_profiles, "position": (0, 350), "width": 17, "height": 3},
-            "Map": {"name": "Map","command": self.show_map, "position": (282, 350), "width": 17, "height": 3},
-            "Appendix": {"name": "Appendix","command": self.show_appendix, "position": (0, 472), "width": 34, "height": 4},
-            
-            
-        }
-        button_back= tk.Button(self.root, text="Back", command=self.getback, bg="WHITE", relief=tk.FLAT,)
-        button_back.place(x=20, y=30)
-        for  key, config in button_config.items():
+    def create_image(self):
+        """Display Book Cover Image."""
+        image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Dance_With_Dragons.png"
+        image = Image.open(image_path)
+        resized_image = image.resize((150, 190))
+        photo = ctk.CTkImage(resized_image, size=(150, 190))
 
-            button = tk.Button(self.root, text=config["name"], command=config["command"], bg="WHITE", width=config["width"], height= config["height"], font=("Arial", 20))
-            button.place(x=config["position"][0], y=config["position"][1])
+        # Display Image
+        self.image_label = ctk.CTkLabel(self.root, image=photo, text="")
+        self.image_label.place(x=210, y=20)
+        self.image_label.image = photo
+
+    def create_buttons(self):
+        """Create Buttons for Navigation."""
+        button_config = {
+            "POV Characters": {"command": self.show_pov_characters, "position": (0, 230), "width": 180, "height": 50},
+            "Book Summary": {"command": self.show_book_summary, "position": (282, 230), "width": 180, "height": 50},
+            "Character Profiles": {"command": self.show_character_profiles, "position": (0, 350), "width": 180, "height": 50},
+            "Map": {"command": self.show_map, "position": (282, 350), "width": 180, "height": 50},
+            "Appendix": {"command": self.show_appendix, "position": (140, 472), "width": 250, "height": 50},
+        }
+
+        # Create Back Button
+        button_back = ctk.CTkButton(
+            self.root, text="Back", command=self.getback,
+            width=80, height=30, fg_color="white", text_color="black", corner_radius=8
+        )
+        button_back.place(x=20, y=30)
+
+        # Create Main Buttons
+        for key, config in button_config.items():
+            ctk.CTkButton(
+                self.root, text=key, command=config["command"],
+                width=config["width"], height=config["height"],
+                corner_radius=10, fg_color="white", text_color="black", hover_color="#d1e7f0"
+            ).place(x=config["position"][0], y=config["position"][1])
+
+    # Navigation Methods
     def show_pov_characters(self):
+        """Navigate to POV Characters."""
         pass
 
     def show_book_summary(self):
+        """Navigate to Book Summary."""
         self.root.destroy()
-        new_root = tk.Tk()
+        new_root = ctk.CTk()
         from Book_Summary import BookSummary_BookV
         BookSummary_BookV(new_root)
         new_root.mainloop()
 
     def show_character_profiles(self):
-       pass
+        """Navigate to Character Profiles."""
+        pass
+
     def show_map(self):
+        """Navigate to Maps."""
         pass
+
     def show_appendix(self):
+        """Navigate to Appendix."""
         pass
+
     def getback(self):
+        """Navigate Back to Main Menu."""
+        self.switch_window("ASOIAF_APP", "MainMenuPage")
+
+    def cancel_pending_callbacks(self):
+        try:
+            for widget in self.root.winfo_children():
+                widget.after_cancel('all')  # Cancel animations for each widget
+        except Exception as e:
+            print(f"Error while canceling callbacks: {e}")
+
+    # Window Management Helper
+    def switch_window(self, module_name, class_name, customtkinter=False):
+        """Destroy current window and open a new one."""
+        self.cancel_pending_callbacks()
         self.root.destroy()
-        new_root = tk.Tk()
-        from ASOIAF_APP import MainMenuPage
-        MainMenuPage(new_root)
+        if customtkinter:
+            new_root = ctk.CTk()
+        else:
+            new_root = tk.Tk()
+        module = __import__(module_name)
+        getattr(module, class_name)(new_root)
         new_root.mainloop()
+
