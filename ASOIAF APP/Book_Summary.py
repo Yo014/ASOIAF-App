@@ -1,50 +1,35 @@
 import tkinter as tk
 import customtkinter as ctk
 from PIL import Image
+from Book_Info import BookInfo_BookI, BookInfo_BookII, BookInfo_BookIII, BookInfo_BookIV, BookInfo_BookV
 
-class BookSummary_BookI():
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Book Summary")
-        self.root.geometry("555x600")
-        ctk.set_appearance_mode("dark")
-        ctk.set_default_color_theme("dark-blue")
-        self.root.resizable(width = False,height = False)
-        ctk.CTkButton._click_animation_running = False
-        ctk.CTkButton._hover_animation_running = False
-        
-        # Create Text Box
-        self.text_box = ctk.CTkTextbox(root, wrap="word", width=500, height=300)
-        self.text_box.place(x=27, y=230)
-
-        # Initialize GUI components
+class BookSummary_BookI(ctk.CTkFrame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+        self.controller = controller
         self.create_image()
         self.create_buttons()
-        
-        # Display Summary
+        self.create_text_box()
         self.show_summaryBookI("A Game of Thrones")
 
     def create_image(self):
-        """Add and display image."""
         image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Game_of_Thrones.png"
         image = Image.open(image_path)
-        resized_image = image.resize((150, 190))  # Resize the image
-        photo = ctk.CTkImage(light_image=resized_image, dark_image=resized_image, size=(150, 190))
-        
-        self.image_label = ctk.CTkLabel(self.root, image=photo, text="")
-        self.image_label.place(x=210, y=20)  # Adjust placement
+        resized_image = image.resize((150, 190))
+        photo = ctk.CTkImage(resized_image, size=(150, 190))
+        self.image_label = ctk.CTkLabel(self, image=photo, text="")
+        self.image_label.place(x=210, y=20)
         self.image_label.image = photo
 
     def create_buttons(self):
-        """Add Back button."""
-        button_back = ctk.CTkButton(
-            self.root, text="Back", command=self.getback, text_color="black",
-            width=80, height=30, corner_radius=8
-        )
+        button_back = ctk.CTkButton(self, text="Back", command=lambda: self.controller.show_frame(BookInfo_BookI), width=80, height=30, corner_radius=8)
         button_back.place(x=20, y=30)
 
+    def create_text_box(self):
+        self.text_box = ctk.CTkTextbox(self, wrap="word", width=500, height=300)
+        self.text_box.place(x=27, y=230)
+
     def get_summaryBookI(self):
-        """Return book summary data."""
         return {
             "A Game of Thrones": {
                 "Plot introduction": "A Game of Thrones is set in Westeros, a land with long seasons reminiscent of Medieval Europe. "
@@ -66,33 +51,20 @@ class BookSummary_BookI():
     def show_summaryBookI(self, book_title):
         summary = self.get_summaryBookI()
         book_summary = summary[book_title]
-        # Update text box with the book summary
         self.update_text_box(book_summary["Plot introduction"] + "\n\n" + book_summary["Plot summary"] + "\n\n" + book_summary["On the Wall"] + "\n\n" + book_summary["Across the Narrow Sea"])
-        
+
     def update_text_box(self, text):
         self.text_box.configure(state="normal")
         self.text_box.delete(1.0, "end")
         self.text_box.insert("end", text)
         self.text_box.configure(state="disabled")
-        
-    def getback(self):
-        self.root.destroy()  # Close the current window (self.root.destroy)
-        new_root = ctk.CTk()
-        from Book_Info import BookInfo_BookI
-        BookInfo_BookI(new_root)
-        new_root.mainloop()
 
-
-class BookSummary_BookII:
-    def __init__(self, root):
+class BookSummary_BookII(ctk.CTkFrame):
+    def __init__(self, parent, controller):
         # Initialize Main Window
-        self.root = root
-        self.root.title("Book Summary")
-        self.root.geometry("555x600")
-        self.root.resizable(width=False, height=False)
+        super().__init__(parent)
+        self.controller = controller
         ctk.set_appearance_mode("dark")
-
-        self.root.resizable(width = False,height = False)
         ctk.CTkButton._click_animation_running = False
         # Create Components
         self.create_image()
@@ -110,14 +82,14 @@ class BookSummary_BookII:
         photo = ctk.CTkImage(resized_image, size=(150, 190))
 
         # Display Image
-        self.image_label = ctk.CTkLabel(self.root, image=photo, text="")
+        self.image_label = ctk.CTkLabel(self, image=photo, text="")
         self.image_label.place(x=210, y=20)
         self.image_label.image = photo
 
     def create_buttons(self):
         """Create Back Button."""
         button_back = ctk.CTkButton(
-            self.root, text="Back", command=self.getback,
+            self, text="Back", command= lambda: self.controller.show_frame(BookInfo_BookII),
             width=80, height=30, fg_color="white", text_color="black", corner_radius=8
         )
         button_back.place(x=20, y=30)
@@ -125,7 +97,7 @@ class BookSummary_BookII:
     def create_text_box(self):
         """Create Text Box for Book Summary."""
         self.text_box = ctk.CTkTextbox(
-            self.root, wrap=tk.WORD, width=500, height=300, corner_radius=10, font=("Arial", 12)
+            self, wrap=tk.WORD, width=500, height=300, corner_radius=10, font=("Arial", 12)
         )
         self.text_box.place(x=27, y=230)
         self.text_box.configure(state="disabled")
@@ -154,21 +126,13 @@ class BookSummary_BookII:
         self.text_box.insert(tk.END, text)
         self.text_box.configure(state="disabled")
 
-    def getback(self):
-        """Navigate Back to Book Info Page."""
-        self.root.destroy()
-        new_root = ctk.CTk()
-        from Book_Info import BookInfo_BookII
-        BookInfo_BookII(new_root)
-        new_root.mainloop()
 
-class BookSummary_BookIII:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Book Summary")
-        self.root.geometry("555x600")
+
+class BookSummary_BookIII(ctk.CTkFrame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+        self.controller = controller
         ctk.set_appearance_mode("dark")
-        self.root.resizable(width=False, height=False)
 
         # Create Components
         self.create_image()
@@ -184,13 +148,13 @@ class BookSummary_BookIII:
         resized_image = image.resize((150, 190))  # Resize the image
         photo = ctk.CTkImage(light_image=resized_image, size=(150, 190))
         
-        self.image_label = ctk.CTkLabel(self.root, image=photo, text="")
+        self.image_label = ctk.CTkLabel(self, image=photo, text="")
         self.image_label.place(x=210, y=20)  # Adjust placement
         self.image_label.image = photo
 
     def create_buttons(self):
         button_back = ctk.CTkButton(
-            self.root, text="Back", command=self.getback, width=80, height=30, 
+            self, text="Back", command=lambda: self.controller.show_frame(BookInfo_BookIII), width=80, height=30, 
             fg_color="white", text_color="black", corner_radius=8
         )
         button_back.place(x=20, y=30)
@@ -198,7 +162,7 @@ class BookSummary_BookIII:
     def create_text_box(self):
         # Create Text Box for Book Summary.
         self.text_box = ctk.CTkTextbox(
-            self.root, wrap="word", width=500, height=300, corner_radius=10, font=("Arial", 12)
+            self, wrap="word", width=500, height=300, corner_radius=10, font=("Arial", 12)
         )
         self.text_box.place(x=27, y=230)
         self.text_box.configure(state="disabled") 
@@ -231,20 +195,13 @@ class BookSummary_BookIII:
         self.text_box.insert("end", text)
         self.text_box.configure(state="disabled")
     
-    def getback(self):
-        self.root.destroy()
-        new_root = ctk.CTk()
-        from Book_Info import BookInfo_BookIII
-        BookInfo_BookIII(new_root)
-        new_root.mainloop()
 
-class BookSummary_BookIV:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Book Summary")
-        self.root.geometry("555x600")
+class BookSummary_BookIV(ctk.CTkFrame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+        self.controller = controller
+
         ctk.set_appearance_mode("dark")
-        self.root.resizable(width=False, height=False)
 
         # Create Components
         self.create_image()
@@ -258,13 +215,13 @@ class BookSummary_BookIV:
         image = image.resize((150, 190))
         photo = ctk.CTkImage(light_image=image, size=(150, 190))
         
-        self.image_label = ctk.CTkLabel(self.root, image=photo, text="")
+        self.image_label = ctk.CTkLabel(self, image=photo, text="")
         self.image_label.place(x=210, y=20)
 
     def create_buttons(self):
         # Add buttons to the interface
         button_back = ctk.CTkButton(
-            self.root, text="Back", command=self.getback, width=80, height=30, 
+            self, text="Back", command=lambda: self.controller.show_frame(BookInfo_BookIV), width=80, height=30, 
             fg_color="white", text_color="black", corner_radius=8
         )
         button_back.place(x=20, y=30)
@@ -272,7 +229,7 @@ class BookSummary_BookIV:
     def create_text_box(self):
         # Create Text Box for Book Summary.
         self.text_box = ctk.CTkTextbox(
-            self.root, wrap="word", width=500, height=300, corner_radius=10, font=("Arial", 12)
+            self, wrap="word", width=500, height=300, corner_radius=10, font=("Arial", 12)
         )
         self.text_box.place(x=27, y=230)
         self.text_box.configure(state="disabled")
@@ -305,18 +262,11 @@ class BookSummary_BookIV:
         self.text_box.insert("end", text)
         self.text_box.configure(state="disabled")
         
-    def getback(self):
-        self.root.destroy()
-        new_root = ctk.CTk()
-        from Book_Info import BookInfo_BookI
-        BookInfo_BookI(new_root)
-        new_root.mainloop()
 
-class BookSummary_BookV:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Book Summary")
-        self.root.geometry("555x600")
+class BookSummary_BookV(ctk.CTkFrame):
+    def __init__(self,parent, controller):
+        super().__init__(parent)
+        self.controller = controller
         ctk.set_appearance_mode("dark")
 
 
@@ -334,19 +284,19 @@ class BookSummary_BookV:
         resized_image = image.resize((150, 190))
         photo = ctk.CTkImage(light_image=resized_image, size=(150, 190))
 
-        self.image_label = ctk.CTkLabel(self.root, image=photo, text="")
+        self.image_label = ctk.CTkLabel(self, image=photo, text="")
         self.image_label.place(x=210, y=20)
 
     def create_buttons(self):
         button_back = ctk.CTkButton(
-            self.root, text="Back", command=self.getback, width=80, height=30,
+            self, text="Back", command=lambda: self.controller.show_frame(BookInfo_BookV), width=80, height=30,
             fg_color="white", text_color="black", corner_radius=8
         )
         button_back.place(x=20, y=30)
 
     def create_text_box(self):
         self.text_box = ctk.CTkTextbox(
-            self.root, wrap="word", width=500, height=300, corner_radius=10, font=("Arial", 12)
+            self, wrap="word", width=500, height=300, corner_radius=10, font=("Arial", 12)
         )
         self.text_box.place(x=27, y=230)
         self.text_box.configure(state="disabled")
@@ -375,10 +325,3 @@ class BookSummary_BookV:
         self.text_box.delete("1.0", "end")
         self.text_box.insert("end", text)
         self.text_box.configure(state="disabled")
-
-    def getback(self):
-        self.root.destroy()
-        new_root = ctk.CTk()
-        from Book_Info import BookInfo_BookV
-        BookInfo_BookV(new_root)
-        new_root.mainloop()

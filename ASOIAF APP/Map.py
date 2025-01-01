@@ -1,15 +1,14 @@
 import customtkinter as ctk
-from PIL import Image, ImageTk
+from PIL import Image
+from ASOIAF_APP import MainMenuPage
 
-class MapsofASOIAF:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Map of ASOIAF")
-        self.root.geometry("1000x1000")
-        self.root.configure(bg="light blue")
-        
+class MapsofASOIAF(ctk.CTkFrame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+        self.controller = controller
+
         # Initialize image_label
-        self.image_label = ctk.CTkLabel(root, text="")
+        self.image_label = ctk.CTkLabel(self, text="")
         
         self.image_label.place(x=100, y=0)
         
@@ -19,13 +18,13 @@ class MapsofASOIAF:
         button_config = {
             "Westoros": self.show_westoros,
             "Essos": self.show_essos,
-            "Back": self.getback
+            "Back":lambda: self.controller.show_frame(MainMenuPage)
         }
         positions = [
             (10, 950), (10, 900), (10, 30)
         ]
         for (text, command), (x, y) in zip(button_config.items(), positions):
-            button = ctk.CTkButton(self.root, text=text, command=command , width=50, height=40)
+            button = ctk.CTkButton(self, text=text, command=command , width=50, height=40)
             button.place(x=x, y=y)
     
     def maps(self):
@@ -60,9 +59,4 @@ class MapsofASOIAF:
         except Exception as e:
             print(f"Error loading image: {e}")
             self.update_text_box("\n[Image could not be loaded.]")
-    def getback(self):
-        self.root.destroy()
-        new_root = ctk.CTk()
-        from Book_Info import BookInfo_BookI
-        BookInfo_BookI(new_root)
-        new_root.mainloop()
+

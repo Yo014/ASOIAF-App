@@ -1,8 +1,10 @@
 import customtkinter as ctk
-from PIL import Image, ImageTk
+from PIL import Image
+from ASOIAF_APP import MainMenuPage
 
-class CharacterProfileBookI:
-    def __init__(self, root):
+class CharacterProfileBookI(ctk.CTkFrame):
+    def __init__(self,controller, parent):
+        super().__init__(parent)
         """
         Initialize the Character Profile Viewer interface.
 
@@ -15,16 +17,16 @@ class CharacterProfileBookI:
         -------
         None
         """
-        self.root = root
-        self.root.title("Character Profile Viewer")
-        self.root.geometry("555x600")
-        self.root.configure(bg="light blue")
+        self.controller = controller
+
+
+
         
         # Initialize GUI components
-        self.image_label = ctk.CTkLabel(root, text="", fg_color="light blue")
+        self.image_label = ctk.CTkLabel(self, text="", fg_color="light blue")
         self.image_label.place(x=230, y=10)  # Adjust placement
         
-        self.text_box = ctk.CTkTextbox(root, wrap="word", width=500, height=230, state="disabled")
+        self.text_box = ctk.CTkTextbox(self, wrap="word", width=500, height=230, state="disabled")
         self.text_box.place(x=15, y=200)
         
         # Add buttons to the interface
@@ -40,11 +42,13 @@ class CharacterProfileBookI:
             "Arya Stark": {"command": self.show_profile_arya, "position": (369, 496)},
             "Sansa Stark": {"command": self.show_profile_sansa, "position": (18, 547)},
             "Bran Stark": {"command": self.show_profile_bran, "position": (279, 547)},
-            "Back": {"command": self.getback, "position": (20, 30)}
         }
+        button_back = ctk.CTkButton(self, text="Back", command=lambda: self.controller.show_frame(MainMenuPage), width=80, height=30, corner_radius=8)
+        button_back.place(x=20, y=30)
+
 
         for text, config in button_config.items():
-            button = ctk.CTkButton(self.root, text=text, command=config["command"], width=120, height=40)
+            button = ctk.CTkButton(self, text=text, command=config["command"], width=120, height=40)
             button.place(x=config["position"][0], y=config["position"][1])
 
     def get_character_profiles(self):
@@ -138,18 +142,13 @@ class CharacterProfileBookI:
         try:
             image_path = f"C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/{image_name}"
             image = Image.open(image_path).resize((150, 190))
-            photo = ImageTk.PhotoImage(image)
+            photo = ctk.CTkImage(image, size=(150, 190))
             self.image_label.configure(image=photo)
             self.image_label.image = photo
         except Exception as e:
             print(f"Error loading image: {e}")
             self.update_text_box("\n[Image could not be loaded.]")
 
-    def getback(self):
-        self.root.destroy()
-        new_root = ctk.CTk()
-        from Book_Info import BookInfo_BookI
-        BookInfo_BookI(new_root)
-        new_root.mainloop()
+
 
 ##class CharacterProfileBookII:

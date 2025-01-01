@@ -1,18 +1,17 @@
 import customtkinter as ctk
-from PIL import Image, ImageTk
-
-class AppendixBookI:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Appendix")
-        self.root.geometry("555x600")
+from PIL import Image
+from ASOIAF_APP import MainMenuPage
+class AppendixBookI(ctk.CTkFrame):
+    def __init__(self,controller, parent):
+        super().__init__(parent)
+        self.controller = controller
         ctk.set_appearance_mode("dark")
         
         # Initialize GUI components
-        self.image_label = ctk.CTkLabel(root, text="")
+        self.image_label = ctk.CTkLabel(self, text="")
         self.image_label.place(x=230, y=10)
         
-        self.text_box = ctk.CTkTextbox(root, wrap="word", width=500, height=200, state="disabled")
+        self.text_box = ctk.CTkTextbox(self, wrap="word", width=500, height=200, state="disabled")
         self.text_box.place(x=20, y=200)
 
         # Add buttons to the interface
@@ -29,11 +28,11 @@ class AppendixBookI:
             "House Greyjoy": {"command": self.show_house_greyjoy, "position": (18, 547)},
             "House Martell": {"command": self.show_house_martell, "position": (189, 547)},
             "House Targaryen": {"command": self.show_house_targaryen, "position": (369, 547)},
-            "Back": {"command": self.getback, "position": (20, 30)}
         }
-
+        button_back = ctk.CTkButton(self, text="Back", command=lambda: self.controller.show_frame(MainMenuPage), width=80, height=30, corner_radius=8)
+        button_back.place(x=20, y=30)
         for text, config in button_config.items():
-            button = ctk.CTkButton(self.root, text=text, command=config["command"], width=150)
+            button = ctk.CTkButton(self, text=text, command=config["command"], width=150)
             button.place(x=config["position"][0], y=config["position"][1])
 
     def get_house_profiles(self):
@@ -88,19 +87,13 @@ class AppendixBookI:
         try:
             image_path = f"C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/House Sigiles /{image_name}"
             image = Image.open(image_path).resize((150, 190))
-            photo = ImageTk.PhotoImage(image)
+            photo = ctk.CTkImage(image, size=(150, 190))
             self.image_label.configure(image=photo)
             self.image_label.image = photo
         except Exception as e:
             print(f"Error loading image: {e}")
             self.update_text_box("\n[Image could not be loaded.]")
 
-    def getback(self):
-        self.root.destroy()
-        new_root = ctk.CTk()
-        from Book_Info import BookInfo_BookI
-        BookInfo_BookI(new_root)
-        new_root.mainloop()
 
         
  
