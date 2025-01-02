@@ -41,7 +41,7 @@ class MainMenuPage(ctk.CTkFrame):
             "A Clash of Kings": {
                 "image_path": "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Clash_of_Kings.png",
                 "command": lambda: self.controller.show_frame(BookInfo_BookII),
-                "position": (200, 50)
+                "position": (195, 50)
             },
             "A Storm of Swords": {
                 "image_path": "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Storm_Of_Swords.png",

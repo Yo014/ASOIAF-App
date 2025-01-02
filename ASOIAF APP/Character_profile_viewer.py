@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from PIL import Image
 from ASOIAF_APP import MainMenuPage
+from Book_Info import BookInfo_BookI
 
 class CharacterProfileBookI(ctk.CTkFrame):
     def __init__(self,controller, parent):
@@ -43,7 +44,7 @@ class CharacterProfileBookI(ctk.CTkFrame):
             "Sansa Stark": {"command": self.show_profile_sansa, "position": (18, 547)},
             "Bran Stark": {"command": self.show_profile_bran, "position": (279, 547)},
         }
-        button_back = ctk.CTkButton(self, text="Back", command=lambda: self.controller.show_frame(MainMenuPage), width=80, height=30, corner_radius=8)
+        button_back = ctk.CTkButton(self, text="Back", command=lambda: self.controller.show_frame(BookInfo_BookI), width=80, height=30, corner_radius=8)
         button_back.place(x=20, y=30)
 
 

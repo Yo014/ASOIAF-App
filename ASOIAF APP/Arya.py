@@ -66,6 +66,7 @@ class AryaBookI(ctk.CTkFrame):
                 height=30
                 )
         self.slider.place(x=75, y=530)
+        self.slider.set(1)
 
     def slider_changed(self, value):
         chapter_index = int(value)

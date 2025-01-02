@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from PIL import Image
-from ASOIAF_APP import MainMenuPage
+from Book_Info import BookInfo_BookI
 class AppendixBookI(ctk.CTkFrame):
     def __init__(self,controller, parent):
         super().__init__(parent)
@@ -29,7 +29,7 @@ class AppendixBookI(ctk.CTkFrame):
             "House Martell": {"command": self.show_house_martell, "position": (189, 547)},
             "House Targaryen": {"command": self.show_house_targaryen, "position": (369, 547)},
         }
-        button_back = ctk.CTkButton(self, text="Back", command=lambda: self.controller.show_frame(MainMenuPage), width=80, height=30, corner_radius=8)
+        button_back = ctk.CTkButton(self, text="Back", command=lambda: self.controller.show_frame(BookInfo_BookI), width=80, height=30, corner_radius=8)
         button_back.place(x=20, y=30)
         for text, config in button_config.items():
             button = ctk.CTkButton(self, text=text, command=config["command"], width=150)
@@ -54,8 +54,43 @@ class AppendixBookI(ctk.CTkFrame):
                 "House description": "Fair-haired, tall, and handsome...",
                 "House members": "TYWIN LANNISTER, Lord of Casterly Rock...",
                 "image": "house_lannister.png"
-            }
-            # Add remaining houses similarly...
+            },
+            "House Arryn": {
+                "Name": "House Arryn",
+                "House description": "The Arryns are a noble family of the Westerlands...",
+                "House members": "ROBB STARK, Lord of Casterly Rock...",
+                "image": "house_arryn.png"
+            },
+            "House Tully": {
+                "Name": "House Tully",
+                "House description": "The Tullys are an ancient royal house...",
+                "House members": "RICKON STARK, Lord of Casterly Rock...",
+                "image": "house_tully.png"
+            },
+            "House Tyrell": {
+                "Name": "House Tyrell",
+                "House description": "The Tyrells are a noble family of the Reach...",
+                "House members": "ROBB STARK, Lord of Casterly Rock...",
+                "image": "house_tyrell.png"
+            },
+            "House Greyjoy": {
+                "Name": "House Greyjoy",
+                "House description": "The Greyjoys are a noble family of the Iron Islands...",
+                "House members": "ROBB STARK, Lord of Casterly Rock...",
+                "image": "house_greyjoy.png"
+            },
+            "House Martell": {
+                "Name": "House Martell",
+                "House description": "The Martells are a noble family of the Westerlands...",
+                "House members": "ROBB STARK, Lord of Casterly Rock...",
+                "image": "house_martell.png"
+            },
+            "House Targaryen": {
+                "Name": "House Targaryen",
+                "House description": "The Targaryens are a noble family of the Dragonstone...",
+                "House members": "ROBB STARK, Lord of Casterly Rock...",
+                "image": "house_targaryen.png"    
+            },
         }
 
     def show_house_baratheon(self): self.show_house_profile("House Baratheon")

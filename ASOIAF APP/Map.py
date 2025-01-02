@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from PIL import Image
-from ASOIAF_APP import MainMenuPage
+from Book_Info import BookInfo_BookI
 
 class MapsofASOIAF(ctk.CTkFrame):
     def __init__(self, parent, controller):
@@ -18,7 +18,7 @@ class MapsofASOIAF(ctk.CTkFrame):
         button_config = {
             "Westoros": self.show_westoros,
             "Essos": self.show_essos,
-            "Back":lambda: self.controller.show_frame(MainMenuPage)
+            "Back":lambda: self.controller.show_frame(BookInfo_BookI)
         }
         positions = [
             (10, 950), (10, 900), (10, 30)

@@ -26,14 +26,14 @@ class BookInfo_BookI(ctk.CTkFrame):
         from Appendix import AppendixBookI
         from ASOIAF_APP import MainMenuPage
         button_config = {
-            "POV Characters": {"command": lambda: self.controller.show_frame(POVCharactersBookI), "position": (0,263), "width": 180, "height": 50},
+            "POV Characters": {"command": lambda: self.controller.show_frame(POVCharactersBookI), "position": (20,230), "width": 180, "height": 50},
             "Book Summary": {"command": lambda: self.controller.show_frame(BookSummary_BookI), "position": (282, 230), "width": 180, "height": 50},
-            "Character Profiles": {"command": lambda: self.controller.show_frame(CharacterProfileBookI), "position": (0, 350), "width": 180, "height": 50},
+            "Character Profiles": {"command": lambda: self.controller.show_frame(CharacterProfileBookI), "position": (20, 350), "width": 180, "height": 50},
             "Map": {"command": lambda: self.controller.show_frame(MapsofASOIAF), "position": (282, 350), "width": 180, "height": 50},
             "Appendix": {"command": lambda: self.controller.show_frame(AppendixBookI), "position": (140, 472), "width": 250, "height": 50},
         }
 
-        button_back = ctk.CTkButton(self.controller, text="Back", command=lambda: self.controller.show_frame(MainMenuPage), width=80, height=30, corner_radius=8)
+        button_back = ctk.CTkButton(self, text="Back", command=lambda: self.controller.show_frame(MainMenuPage), width=80, height=30, corner_radius=8)
         button_back.place(x=20, y=30)
 
         for key, config in button_config.items():
