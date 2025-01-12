@@ -10,10 +10,10 @@ class BookInfo_BookI(ctk.CTkFrame):
         self.create_buttons()
 
     def create_image(self):
-        image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/A_Game_of_Thrones.png"
+        image_path = "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/BookCover/AGOT_Cover.png"
         image = Image.open(image_path)
-        resized_image = image.resize((150, 190))
-        photo = ctk.CTkImage(resized_image, size=(150, 190))
+        resized_image = image.resize((240, 176))
+        photo = ctk.CTkImage(resized_image, size=(240, 176))
         self.image_label = ctk.CTkLabel(self, image=photo, text="")
         self.image_label.place(x=210, y=20)
         self.image_label.image = photo

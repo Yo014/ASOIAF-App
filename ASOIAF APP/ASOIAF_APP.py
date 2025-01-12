@@ -1,6 +1,6 @@
 
 import customtkinter as ctk
-from PIL import Image
+from PIL import Image, ImageTk
 
 # Disable animations and scaling
 ctk.deactivate_automatic_dpi_awareness()
@@ -16,8 +16,9 @@ class MainMenuPage(ctk.CTkFrame):
     def __init__(self, parent, controller):
         super().__init__(parent)
         self.controller = controller
-        self.controller.geometry("555x600")
-        self.controller.title("A Song of Ice and Fire App")
+        self.parent=parent
+        self.parent.iconbitmap("C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/House Sigiles/House_Stark.png")
+        
     
         self.create_buttons()
 

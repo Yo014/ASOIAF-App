@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from PIL import Image, ImageTk
 from ASOIAF_APP import MainMenuPage
 from Book_Info import BookInfo_BookI, BookInfo_BookII, BookInfo_BookIII, BookInfo_BookIV, BookInfo_BookV
 from Book_Summary import BookSummary_BookI, BookSummary_BookII, BookSummary_BookIII, BookSummary_BookIV, BookSummary_BookV
@@ -15,12 +16,14 @@ from Sansa import SansaBookI
 from Tyrion import TyrionBookI
 from Daenerys import DaenerysBookI
 
+
 class WindowManager(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("ASOIAF App")
         self.eval('tk::PlaceWindow . left')
         self.geometry("555x600")
+        self.iconbitmap("C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/dragon.ico")
         self.frames = {}
         self.create_frames()
         self.resizable(False, False)
@@ -57,6 +60,7 @@ class WindowManager(ctk.CTk):
         frame = self.frames[page_class.__name__]
         frame.tkraise()
         frame.update_idletasks()
+    
 
 if __name__ == "__main__":
     app = WindowManager()

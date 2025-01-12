@@ -1,6 +1,15 @@
 import customtkinter as ctk
 from PIL import Image
-
+from CTkScrollableDropdown import *
+from Arya import AryaBookI, AryaBookII
+from Bran import BranBookI
+from Catelyn import CatelynBookI
+from Eddard import EddardBookI
+from Jon import JonBookI
+from Book_Info import BookInfo_BookI
+from Sansa import SansaBookI
+from Tyrion import TyrionBookI
+from Daenerys import DaenerysBookI
 
 class POVCharactersBookI(ctk.CTkFrame):
     """
@@ -13,9 +22,6 @@ class POVCharactersBookI(ctk.CTkFrame):
         self.controller = controller
    
         # Initialize GUI components
-
-
-        
         self.image_paths = [
             "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/eddard_stark.png",
             "C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/Arya_Stark.png",
@@ -33,6 +39,35 @@ class POVCharactersBookI(ctk.CTkFrame):
 
         self.update_image()
         self.cycle_images()  # Start cycling through images
+        
+                # Add entry with autocomplete
+        entry = ctk.CTkEntry(self, width=340)
+        entry.pack(fill="x", padx=20, pady=20)
+        entry.place(x=100, y=250)
+
+        def insert_method(e):   
+            entry.delete(0, 'end')
+            entry.insert(0, e)
+            
+            if e == "Eddard":
+                self.controller.show_frame(EddardBookI)
+            elif e == "Catelyn":
+                self.controller.show_frame(CatelynBookI)
+            elif e == "Tyrion":
+                self.controller.show_frame(TyrionBookI)
+            elif e == "Jon":
+                self.controller.show_frame(JonBookI)
+            elif e == "Daenerys":
+                self.controller.show_frame(DaenerysBookI)
+            elif e == "Arya":
+                self.controller.show_frame(AryaBookI)
+            elif e == "Sansa":
+                self.controller.show_frame(SansaBookI)
+            elif e == "Bran":
+                self.controller.show_frame(BranBookI)
+
+        values = ["Eddard", "Catelyn", "Tyrion", "Jon", "Daenerys", "Arya", "Sansa", "Bran"]
+        CTkScrollableDropdown(entry, values=values, command=lambda e: insert_method(e),autocomplete=True, width=340,)
 
         
         # Add buttons to the interface
@@ -59,46 +94,12 @@ class POVCharactersBookI(ctk.CTkFrame):
         self.after(9000, self.cycle_images)
         
     def create_buttons(self):
-        """
-        Creates buttons dynamically for different characters in the first book.
-        """
-        from Arya import AryaBookI, AryaBookII
-        from Bran import BranBookI
-        from Catelyn import CatelynBookI
-        from Eddard import EddardBookI
-        from Jon import JonBookI
-        from Book_Info import BookInfo_BookI
-        from Sansa import SansaBookI
-        from Tyrion import TyrionBookI
-        from Daenerys import DaenerysBookI
-        
-        button_config = {
-            "Eddard": {"name": "Eddard", "command": lambda: self.controller.show_frame(EddardBookI), "position": (80, 250)},
-            "Catelyn": {"name": "Catelyn", "command": lambda: self.controller.show_frame(CatelynBookI), "position": (322, 250)},
-            "Tyrion": {"name": "Tyrion", "command": lambda: self.controller.show_frame(TyrionBookI), "position": (80, 337)},
-            "Jon": {"name": "Jon", "command": lambda: self.controller.show_frame(JonBookI), "position": (322, 337)},
-            "Daenerys": {"name": "Daenerys", "command": lambda: self.controller.show_frame(DaenerysBookI), "position": (80, 425)},
-            "Arya": {"name": "Arya", "command": lambda: self.controller.show_frame(AryaBookI), "position": (322, 425)},
-            "Sansa": {"name": "Sansa", "command": lambda: self.controller.show_frame(SansaBookI), "position": (80, 513)},
-            "Bran": {"name": "Bran", "command": lambda: self.controller.show_frame(BranBookI), "position": (322, 513)},
-        }
-        button_back = ctk.CTkButton(self, fg_color="transparent", text="Back", command=lambda: self.controller.show_frame(BookInfo_BookI), width=80, height=30, corner_radius=8)
+
+        button_back = ctk.CTkButton(self, text="Back", 
+            command=lambda: self.controller.show_frame(BookInfo_BookI),fg_color="transparent", bg_color="transparent",
+            width=80, height=30, corner_radius=8)
         button_back.place(x=20, y=30)       
 
-        for key, config in button_config.items():
-            button = ctk.CTkButton(
-                self,
-                text=config["name"],
-                corner_radius=8,
-                command=config["command"],
-                fg_color="transparent",
-                text_color="white",
-                hover_color="lightgray",
-                font=("Arial", 20),
-                width=150,
-                height=80,
-            )
-            button.place(x=config["position"][0], y=config["position"][1])
 
 
 class POVCharactersBookII(ctk.CTkFrame):
