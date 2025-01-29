@@ -23,7 +23,6 @@ class WindowManager(ctk.CTk):
         self.title("ASOIAF App")
         self.eval('tk::PlaceWindow . left')
         self.geometry("555x600")
-        self.iconbitmap("C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/dragon.ico")
         self.frames = {}
         self.create_frames()
         self.resizable(False, False)
