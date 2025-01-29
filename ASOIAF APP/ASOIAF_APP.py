@@ -17,7 +17,6 @@ class MainMenuPage(ctk.CTkFrame):
         super().__init__(parent)
         self.controller = controller
         self.parent=parent
-        self.parent.iconbitmap("C:/Users/emuki/OneDrive/Desktop/ASOIAF APP/ASOIAF-App/ASOIAF APP/Png Files/House Sigiles/House_Stark.png")
         
     
         self.create_buttons()
