@@ -45,53 +45,49 @@ class DaenerysBookI(ctk.CTkFrame):
             corner_radius=8,bg_color="transparent",fg_color="transparent",hover_color="grey",font=("Arial", 18)
         )
         button_back.place(x=20, y=30)
-    
     def show_Daenerys_chapter(self):
         return {
-            "Daenerys I": {
-                "content": "Daenerys I content",
-                "image": "Daenerys_Targaryen.png"
-            },
-            "Daenerys II": {
-                "content": "Daenerys II content",
-                "image": "Daenerys_Targaryen.png"
-            },
-            "Daenerys III": {
-                "content": "Daenerys III content",
-                "image": "Daenerys_Targaryen.png"
-            },
-            "Daenerys IV": {
-                "content": "Daenerys IV content",
-                "image": "Daenerys_Targaryen.png"
-            },
-            "Daenerys V": {
-                "content": "Daenerys V content",
-                "image": "Daenerys_Targaryen.png"
-            },
-            "Daenerys VI": {
-                "content": "Daenerys VI content",
-                "image": "Daenerys_Targaryen.png"
-            },
-            "Daenerys VII": {
-                "content": "Daenerys VII content",
-                "image": "Daenerys_Targaryen.png"
-            },
-            "Daenerys VIII": {
-                "content": "Daenerys VIII content",
-                "image": "Daenerys_Targaryen.png"
-            },
-            "Daenerys IX": {
-                "content": "Daenerys IX content",
-                "image": "Daenerys_Targaryen.png"
-            },
-            "Daenerys X": {
-                "content": "Daenerys X content",
-                "image": "Daenerys_Targaryen.png"
-            }
-
-
-          
+        "Daenerys I": {
+            "content": "Daenerys I:Exiled prince Viserys Targaryen sells his sister Daenerys to Khal Drogo of the Dothraki in exchange for an army to take back the Seven Kingdoms.",
+            "image": "Daenerys_Targaryen.png"
+        },
+        "Daenerys II": {
+            "content": "Daenerys II:Daenerys weds Khal Drogo and is offered many wedding gifts, among them three dragon eggs from Magister Illyrio Mopatis.",
+            "image": "Daenerys_Targaryen.png"
+        },
+        "Daenerys III": {
+            "content": "Daenerys III:As Dany further adapts to the Dothraki lifestyle, she finds herself drifting apart from her rigid brother Viserys. Dany acknowledges that she is pregnant.",
+            "image": "Daenerys_Targaryen.png"
+        },
+        "Daenerys IV": {
+            "content": "Daenerys IV:Daenerys arrives at Vaes Dothrak.",
+            "image": "Daenerys_Targaryen.png"
+        },
+        "Daenerys V": {
+            "content": "Daenerys V:The dosh khaleen proclaim Dany's unborn child the stallion who mounts the world. At a celebratory feast that night, Viserys threatens Daenerys and demands his promised crown, leading Drogo to pour molten gold over him.",
+            "image": "Daenerys_Targaryen.png"
+        },
+        "Daenerys VI": {
+            "content": "Daenerys VI:Drogo states he has no desire to invade Westeros with Viserys dead, but changes his mind after an assassination attempt against Daenerys.",
+            "image": "Daenerys_Targaryen.png"
+        },
+        "Daenerys VII": {
+            "content": "Daenerys VII:Daenerys saves a woman named Mirri from being raped in a newly-conquered Lhazareen village. Mirri treats a wound Drogo received in the fight.",
+            "image": "Daenerys_Targaryen.png"
+        },
+        "Daenerys VIII": {
+            "content": "Daenerys VIII:Drogo is dying and Mirri performs a bloodmagic ritual to save him, but Drogo's bloodriders resist. Daenerys goes into labor, and Ser Jorah takes her into Drogo’s tent while the ritual is in progress.",
+            "image": "Daenerys_Targaryen.png"
+        },
+        "Daenerys IX": {
+            "content": "Daenerys IX:Daenerys smothers Drogo, who has been reduced to a vegetable.",
+            "image": "Daenerys_Targaryen.png"
+        },
+        "Daenerys X": {
+            "content": "Daenerys X:Daenerys builds a giant funeral pyre for Drogo in which her dragon eggs hatch.",
+            "image": "Daenerys_Targaryen.png"
         }
+    }
     def display_Daenerys(self, daenerys_name):
         profiles = self.show_Daenerys_chapter()
         Daenerys_chapter = profiles[daenerys_name]
