@@ -45,51 +45,55 @@ class CatelynBookI(ctk.CTkFrame):
             corner_radius=8,bg_color="transparent",fg_color="transparent",hover_color="grey",font=("Arial", 18)
         )
         button_back.place(x=20, y=30)
-    
+
     def show_Catelyn_chapter(self):
         return {
-            "Catelyn I": {
-                "content": "Catelyn I content",
-                "image": "Catelyn_Stark.png"
-            },
-            "Catelyn II": {
-                "content": "Catelyn II content",
-                "image": "Catelyn_Stark.png"
-            },
-            "Catelyn III": {
-                "content": "Catelyn III content",  
-                "image": "Catelyn_Stark.png"
-            },
-            "Catelyn IV": {
-                "content": "Catelyn IV content",
-                "image": "Catelyn_Stark.png"
-            },
-            "Catelyn V": {
-                "content": "Catelyn V content",
-                "image": "Catelyn_Stark.png"
-            },
-            "Catelyn VI": {
-                "content": "Catelyn VI content",
-                "image": "Catelyn_Stark.png"
-            },
-            "Catelyn VII": {
-                "content": "Catelyn VII content",
-                "image": "Catelyn_Stark.png"
-            },
-            "Catelyn VIII": {
-                "content": "Catelyn VIII content",
-                "image": "Catelyn_Stark.png"
-            },
-            "Catelyn IX": {
-                "content": "Catelyn IX content",
-                "image": "Catelyn_Stark.png"
-            },
-            "Catelyn X": {
-                "content": "Catelyn X content",
-                "image": "Catelyn_Stark.png"
-            },
-
+        "Catelyn I": {
+            "content": "Catelyn I:Catelyn Tully informs her husband, Eddard, that Jon Arryn, an old friend of Eddard’s, has died and that King Robert Baratheon is coming to Winterfell.",
+            "image": "Catelyn_Stark.png"
+        },
+        "Catelyn II": {
+            "content": "Catelyn II:A secret letter from Catelyn’s sister Lysa convinces Eddard to go to King’s Landing with the king. Lysa claims that Jon Arryn was murdered by the queen.",
+            "image": "Catelyn_Stark.png"
+        },
+        "Catelyn III": {
+            "content": "Catelyn III:Catelyn survives an attack by an unknown assailant looking to kill Bran. She decides to take the assassin’s dagger to King’s Landing to warn Eddard and learn who sent the would-be killer.",
+            "image": "Catelyn_Stark.png"
+        },
+        "Catelyn IV": {
+            "content": "Catelyn IV:Catelyn arrives in King’s Landing and secretly meets with Petyr “Littlefinger” Baelish. Petyr reveals that the assassin’s dagger belonged to Tyrion Lannister.",
+            "image": "Catelyn_Stark.png"
+        },
+        "Catelyn V": {
+            "content": "Catelyn V:Close to her home in Riverrun, Catelyn decides to spend the night at an inn. Tyrion Lannister arrives at the same inn shortly after, prompting Cat to accuse him of attempted murder and take him captive.",
+            "image": "Catelyn_Stark.png"
+        },
+        "Catelyn VI": {
+            "content": "Catelyn VI:Catelyn succeeds in bringing Tyrion to the Vale. Lysa is furious that Catelyn has brought him there.",
+            "image": "Catelyn_Stark.png"
+        },
+        "Catelyn VII": {
+            "content": "Catelyn VII:Bronn defeats Ser Vardis Egen in a trial by combat to secure Tyrion’s release. Lysa orders both of them released onto the high road without an escort.",
+            "image": "Catelyn_Stark.png"
+        },
+        "Catelyn VIII": {
+            "content": "Catelyn VIII:Catelyn meets Robb at Moat Cailin. Robb explains his battle plan for the coming campaign.",
+            "image": "Catelyn_Stark.png"
+        },
+        "Catelyn IX": {
+            "content": "Catelyn IX:Robb arrives at the Twins, and Catelyn negotiates an agreement for Lord Walder Frey’s aid that includes Robb marrying one of Walder’s daughters after the war.",
+            "image": "Catelyn_Stark.png"
+        },
+        "Catelyn X": {
+            "content": "Catelyn X:Robb ambushes and captures Jaime in the Battle of the Whispering Wood.",
+            "image": "Catelyn_Stark.png"
+        },
+        "Catelyn XI": {
+            "content": "Catelyn XI:Robb is proclaimed King in the North by the great lords of the north and the riverlands.",
+            "image": "Catelyn_Stark.png"
         }
+    }
+    
     def display_Catelyn(self, catelyn_name):
         profiles = self.show_Catelyn_chapter()
         Catelyn_chapter = profiles[catelyn_name]
