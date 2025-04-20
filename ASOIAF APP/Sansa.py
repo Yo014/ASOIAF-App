@@ -46,35 +46,33 @@ class SansaBookI(ctk.CTkFrame):
         )
         button_back.place(x=20, y=30)
     
-    def show_Sansa_chapter(self):
+        def show_Sansa_chapter(self):
         return {
-            "Sansa I": {
-                "content": "Sansa I content",
-                "image": "Sansa_Stark.png"
-            },
-            "Sansa II": {
-                "content": "Sansa II content",
-                "image": "Sansa_Stark.png"
-            },
-            "Sansa III": {
-                "content": "Sansa III content",
-                "image": "Sansa_Stark.png"
-            },
-            "Sansa IV": {
-                "content": "Sansa IV content",
-                "image": "Sansa_Stark.png"
-            },
-            "Sansa V": {
-                "content": "Sansa V content",
-                "image": "Sansa_Stark.png"
-            },
-            "Sansa VI": {
-                "content": "Sansa VI content",
-                "image": "Sansa_Stark.png"
-            },
-     
-
+        "Sansa I": {
+            "content": "Sansa I:Joffrey takes Sansa out riding, where they encounter Arya playing at swords with a boy. A drunken Joffrey challenges the boy, but is attacked by Arya and his arm is mangled by Arya's direwolf Nymeria.",
+            "image": "Sansa_Stark.png"
+        },
+        "Sansa II": {
+            "content": "Sansa II:Sansa attends the Hand’s tournament, where she witnesses the death of a young knight during a joust with Gregor Clegane. After the night’s feast, Sandor Clegane escorts Sansa back to the Red Keep.",
+            "image": "Sansa_Stark.png"
+        },
+        "Sansa III": {
+            "content": "Sansa III:Eddard tells Sansa and Arya he is sending them back to Winterfell for their own safety.",
+            "image": "Sansa_Stark.png"
+        },
+        "Sansa IV": {
+            "content": "Sansa IV:Sansa is brought before Cersei, who tells her to write a letter to Robb urging him not to take up arms.",
+            "image": "Sansa_Stark.png"
+        },
+        "Sansa V": {
+            "content": "Sansa V:Sansa comes to Joffrey’s first court to beg for mercy for Eddard.",
+            "image": "Sansa_Stark.png"
+        },
+        "Sansa VI": {
+            "content": "Sansa VI:Joffrey mocks and threatens Sansa and has his Kingsguard beat her.",
+            "image": "Sansa_Stark.png"
         }
+    }
     def display_Sansa(self, sansa_name):
         profiles = self.show_Sansa_chapter()
         Sansa_chapter = profiles[sansa_name]
