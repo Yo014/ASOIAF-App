@@ -35,7 +35,7 @@ class BranBookI(ctk.CTkFrame):
         chapter_name = f"Bran {self.convert_to_roman(chapter_index)}"
         self.display_Bran(chapter_name)
     def convert_to_roman(self, num):
-        roman_numerals=["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI"]
+        roman_numerals=["I", "II", "III", "IV", "V", "VI", "VII"]
         return roman_numerals[num-1]
     
     def create_buttons(self):
@@ -48,36 +48,35 @@ class BranBookI(ctk.CTkFrame):
     
     def show_Bran_chapter(self):
         return {
-            "Bran I": {
-                "content": "Bran I content",
-                "image": "Bran_Stark.png"
-            },
-            "Bran II": {
-                "content": "Bran II content",
-                "image": "Bran_Stark.png"
-            },
-            "Bran III": {
-                "content": "Bran III content",  
-                "image": "Bran_Stark.png"
-            },
-            "Bran IV": {
-                "content": "Bran IV content",
-                "image": "Bran_Stark.png"
-            },
-            "Bran V": {
-                "content": "Bran V content",
-                "image": "Bran_Stark.png"
-            },
-            "Bran VI": {
-                "content": "Bran VI content",
-                "image": "Bran_Stark.png"
-            },
-            "Bran VII": {
-                "content": "Bran VII content",
-                "image": "Bran_Stark.png"
-            },
-
+        "Bran I": {
+            "content": "Bran I:Robb Stark and Jon Snow discover a litter of direwolves, one pup for each of Eddard Stark's six children.",
+            "image": "Bran_Stark.png"
+        },
+        "Bran II": {
+            "content": "Bran II:Bran accidentally witnesses Queen Cersei Lannister having sex with her twin brother, Ser Jaime Lannister of the Kingsguard. Jaime shoves Bran from a tower.",
+            "image": "Bran_Stark.png"
+        },
+        "Bran III": {
+            "content": "Bran III:After several cryptic dreams, Bran finally wakes from his coma. He names his direwolf Summer.",
+            "image": "Bran_Stark.png"
+        },
+        "Bran IV": {
+            "content": "Bran IV:Bran listens to Old Nan recount a tale about the Others when Tyrion Lannister returns to Winterfell, bearing a gift for the crippled boy.",
+            "image": "Bran_Stark.png"
+        },
+        "Bran V": {
+            "content": "Bran V:Bran takes his first ride outside Winterfell on Dancer and is accosted by a group of wildlings and Night's Watch deserters. They are all killed save a wildling named Osha.",
+            "image": "Bran_Stark.png"
+        },
+        "Bran VI": {
+            "content": "Bran VI:Robb has called the banners of the North and Bran hosts the Karstarks. Robb marches south.",
+            "image": "Bran_Stark.png"
+        },
+        "Bran VII": {
+            "content": "Bran VII:Maester Luwin tells Bran and Rickon about the children of the forest. A raven arrives announcing Eddard's death.",
+            "image": "Bran_Stark.png"
         }
+    }
     def display_Bran(self, bran_name):
         profiles = self.show_Bran_chapter()
         Bran_chapter = profiles[bran_name]
