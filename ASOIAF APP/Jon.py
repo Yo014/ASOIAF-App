@@ -45,48 +45,47 @@ class JonBookI(ctk.CTkFrame):
             corner_radius=8,bg_color="transparent",fg_color="transparent",hover_color="grey",font=("Arial", 18)
         )
         button_back.place(x=20, y=30)
-    
     def show_Jon_chapter(self):
         return {
-            "Jon I": {
-                "content": "Jon I content",
-                "image": "Jon_Snow.png"
-            },
-            "Jon II": {
-                "content": "Jon II content",
-                "image": "Jon_Snow.png"
-            },
-            "Jon III": {
-                "content": "Jon III content",
-                "image": "Jon_Snow.png"
-            },
-            "Jon IV": {
-                "content": "Jon IV content",
-                "image": "Jon_Snow.png"
-            },
-            "Jon V": {
-                "content": "Jon V content",
-                "image": "Jon_Snow.png"
-            },
-            "Jon VI": {
-                "content": "Jon VI content",
-                "image": "Jon_Snow.png"
-            },
-            "Jon VII": {
-                "content": "Jon VII content",
-                "image": "Jon_Snow.png"
-            },
-            "Jon VIII": {
-                "content": "Jon VIII content",
-                "image": "Jon_Snow.png"
-            },
-            "Jon IX": {
-                "content": "Jon IX content",
-                "image": "Jon_Snow.png"
-            },
-  
-
+        "Jon I": {
+            "content": "Jon I:A feast is held in honor of the king. Tyrion Lannister, brother of the queen and a dwarf, speaks with Jon Snow about being Eddard Stark's bastard son. Jon declares that he wishes to join the Night's Watch.",
+            "image": "Jon_Snow.png"
+        },
+        "Jon II": {
+            "content": "Jon II:Before leaving with his uncle Benjen Stark for the Wall, Jon visits with Bran, Robb, and Arya. He gives Arya a small sword named Needle.",
+            "image": "Jon_Snow.png"
+        },
+        "Jon III": {
+            "content": "Jon III:Jon begins his training at Castle Black. Benjen Stark has gone missing on a ranging beyond the Wall.",
+            "image": "Jon_Snow.png"
+        },
+        "Jon IV": {
+            "content": "Jon IV:Samwell Tarly, a coward forced to join the Night's Watch by his father, arrives at the Wall. Jon convinces the trainees to help Sam avoid mistreatment at the hands of Ser Alliser Thorne.",
+            "image": "Jon_Snow.png"
+        },
+        "Jon V": {
+            "content": "Jon V:Jon and several of his friends learn they are to be raised to the Night's Watch. Jon sees Maester Aemon about raising Sam as well.",
+            "image": "Jon_Snow.png"
+        },
+        "Jon VI": {
+            "content": "Jon VI:Jon, Sam and several others are raised to the Night's Watch. Ghost discovers a rotting hand beyond the Wall.",
+            "image": "Jon_Snow.png"
+        },
+        "Jon VII": {
+            "content": "Jon VII:Lord Commander Mormont examines the corpses of two of Ben Stark's rangers and orders them brought back to Castle Black. Jon learns of Eddard's arrest and assaults Ser Alliser, which gets him arrested. Jon saves Lord Commander Mormont from a wight.",
+            "image": "Jon_Snow.png"
+        },
+        "Jon VIII": {
+            "content": "Jon VIII:Maester Aemon tells Jon about his past as Jon grapples with the decision of whether or not to desert to help his father.",
+            "image": "Jon_Snow.png"
+        },
+        "Jon IX": {
+            "content": "Jon IX:Jon deserts the Night's Watch to join Robb, but his friends are able to bring him back. Lord Commander Mormont declares his intention to lead a large expedition north to find Benjen Stark and Mance Rayder.",
+            "image": "Jon_Snow.png"
         }
+    }
+
+
     def display_Jon(self, Jon_name):
         profiles = self.show_Jon_chapter()
         Jon_chapter = profiles[Jon_name]
