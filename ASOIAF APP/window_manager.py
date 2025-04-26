@@ -8,13 +8,15 @@ from Map import MapsofASOIAF
 from Character_profile_viewer import CharacterProfileBookI
 from Appendix import AppendixBookI
 from Arya import AryaBookI, AryaBookII, AryaBookIII
-from Bran import BranBookI
-from Catelyn import CatelynBookI
+from Bran import BranBookI, BranBookII
+from Catelyn import CatelynBookI , CatelynBookII
 from Eddard import EddardBookI
-from Jon import JonBookI
-from Sansa import SansaBookI
-from Tyrion import TyrionBookI
-from Daenerys import DaenerysBookI
+from Jon import JonBookI, JonBookII
+from Sansa import SansaBookI, SansaBookII
+from Tyrion import TyrionBookI, TyrionBookII
+from Daenerys import DaenerysBookI, DaenerysBookII
+from Davos import DavosBookII
+from Theon import TheonBookII
 
 
 class WindowManager(ctk.CTk):
@@ -46,7 +48,8 @@ class WindowManager(ctk.CTk):
         for F in (MainMenuPage, BookInfo_BookI, BookInfo_BookII, BookInfo_BookIII, BookInfo_BookIV, BookInfo_BookV,
                   BookSummary_BookI, BookSummary_BookII, BookSummary_BookIII, BookSummary_BookIV, BookSummary_BookV,
                   POVCharactersBookI, POVCharactersBookII, POVCharactersBookIII, MapsofASOIAF, CharacterProfileBookI, AppendixBookI, AryaBookI, 
-                  AryaBookII, AryaBookIII, BranBookI, CatelynBookI, EddardBookI, JonBookI, SansaBookI, TyrionBookI, DaenerysBookI):
+                  AryaBookII, AryaBookIII, BranBookI, CatelynBookI, EddardBookI, JonBookI, SansaBookI, TyrionBookI, DaenerysBookI, DaenerysBookI, TyrionBookII, JonBookII, 
+                  BranBookII,DavosBookII,CatelynBookII,TheonBookII, SansaBookII):
             page_name = F.__name__
             frame = F( self, self)
             self.frames[page_name] = frame
